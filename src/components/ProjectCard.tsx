@@ -99,15 +99,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div
       ref={containerRef}
-      className="grid grid-cols-12 gap-y-12 md:gap-x-8 lg:gap-x-12 items-center py-20 md:py-32 border-b border-white/5"
+      className={`flex flex-col md:flex-row gap-y-12 items-center py-20 md:py-32 border-b border-white/5 ${
+        project.layout === "left" ? "" : "md:flex-row-reverse"
+      }`}
     >
       {/* Text Content */}
       <div
         ref={textRef}
-        className={`col-span-12 md:col-span-5 flex flex-col justify-center space-y-6 ${
+        className={`w-full md:w-5/12 flex flex-col justify-center space-y-6 ${
           project.layout === "left" 
-            ? "order-2 md:order-1 md:pr-12" 
-            : "order-2 md:order-2 md:pl-12"
+            ? "md:pr-12" 
+            : "md:pl-12"
         }`}
       >
         {/* Meta / Eyebrow */}
@@ -157,13 +159,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Image Content */}
-      <div
-        className={`col-span-12 md:col-span-7 ${
-          project.layout === "left" 
-            ? "order-1 md:order-2" 
-            : "order-1 md:order-1"
-        }`}
-      >
+      <div className="w-full md:w-7/12">
         <a
           href={project.link}
           target="_blank"
