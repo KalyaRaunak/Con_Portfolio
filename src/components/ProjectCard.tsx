@@ -106,8 +106,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         ref={textRef}
         className={`col-span-12 md:col-span-5 flex flex-col justify-center space-y-6 ${
           project.layout === "left" 
-            ? "order-2 md:order-1 md:pr-4 lg:pr-8" 
-            : "order-2 md:order-2 md:col-start-8 md:pl-4 lg:pl-8"
+            ? "order-2 md:order-1 md:pr-12" 
+            : "order-2 md:order-2 md:pl-12"
         }`}
       >
         {/* Meta / Eyebrow */}
@@ -158,10 +158,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Image Content */}
       <div
-        className={`col-span-12 md:col-span-6 ${
+        className={`col-span-12 md:col-span-7 ${
           project.layout === "left" 
-            ? "order-1 md:order-2 md:col-start-7" 
-            : "order-1 md:order-1 md:col-start-1"
+            ? "order-1 md:order-2" 
+            : "order-1 md:order-1"
         }`}
       >
         <a
