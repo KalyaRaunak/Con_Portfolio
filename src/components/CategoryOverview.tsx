@@ -68,8 +68,11 @@ export default function CategoryOverview() {
   };
 
   return (
-    <section className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5" id="services-section">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <section className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5 relative overflow-hidden" id="services-section">
+      {/* Subtle light orange background tone (minimal accent) */}
+      <div className="absolute glow-effect w-[500px] h-[500px] top-1/2 right-[-10%] -translate-y-1/2 rounded-full opacity-[0.04] pointer-events-none select-none z-0" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Section Header */}
         <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-8">
           <div>

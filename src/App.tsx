@@ -318,10 +318,13 @@ export default function App() {
 
       {/* 2. About Converge Section */}
       <section
-        className="py-32 md:py-48 bg-[#0F0F10] border-t border-white/5 relative z-10"
+        className="py-32 md:py-48 bg-[#0F0F10] border-t border-white/5 relative z-10 overflow-hidden"
         id="about-section"
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Subtle light orange background tone (minimal accent) */}
+        <div className="absolute glow-effect w-[500px] h-[500px] top-1/2 left-[-10%] -translate-y-1/2 rounded-full opacity-[0.05] pointer-events-none select-none z-0" />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
             
             {/* Left column large statement */}

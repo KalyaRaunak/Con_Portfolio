@@ -42,6 +42,9 @@ export default function Testimonial() {
       ref={sectionRef}
       className="py-32 md:py-48 bg-[#0F0F10] border-t border-white/5 relative overflow-hidden flex items-center justify-center"
     >
+      {/* Subtle light orange background tone (minimal accent) */}
+      <div className="absolute glow-effect w-[450px] h-[450px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.04] pointer-events-none select-none z-0" />
+
       {/* Oversized background quote mark, reminiscent of the hero glow */}
       <div 
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0"
