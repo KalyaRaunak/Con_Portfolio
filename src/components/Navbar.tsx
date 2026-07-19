@@ -171,7 +171,7 @@ export default function Navbar() {
       >
         <div className="flex justify-between items-center w-full">
           <span className="font-display uppercase text-2xl tracking-tight text-[#F5F5F5]">
-            CONVERGE
+            CONVERGE DIGITALS
           </span>
           
           <MagneticButton className="p-2">
@@ -228,7 +228,7 @@ export default function Navbar() {
           </div>
           <div className="mt-4 sm:mt-0">
             <p className="eyebrow text-white mb-2">Location</p>
-            <p>San Francisco, CA</p>
+            <p>INDIA</p>
           </div>
         </div>
       </div>
