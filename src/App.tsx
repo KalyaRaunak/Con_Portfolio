@@ -66,17 +66,6 @@ const FEATURED_PROJECTS: Project[] = [
     layout: "right"
   },
   {
-    id: "ssi",
-    name: "SSI",
-    industry: "Education",
-    services: ["Website Design", "Automation"],
-    year: "2024",
-    description: "A powerful coaching portal integrated with enrollment automation, automatic schedule updates, and a custom student portal.",
-    image: "/images/ssi_education.png",
-    link: "https://ssi-tau.vercel.app/",
-    layout: "left"
-  },
-  {
     id: "enki",
     name: "ENKI",
     industry: "Retail & Agriculture",
@@ -85,17 +74,6 @@ const FEATURED_PROJECTS: Project[] = [
     description: "Organic visual identity and digital catalog for a premium mushroom farm and supplement brand, focusing on natural textures and earthy color tones.",
     image: "/images/enki_mushrooms.png",
     link: "https://enki-bay.vercel.app/",
-    layout: "right"
-  },
-  {
-    id: "ganpati-computers",
-    name: "Ganpati Computers",
-    industry: "IT Services & Retail",
-    services: ["Website Design", "Automation"],
-    year: "2024",
-    description: "Responsive web platform and automated repair booking workflows for a retail computer seller and repair service center, optimizing client communications.",
-    image: "/images/ganpati_computers.png",
-    link: "https://ganpati-computers.vercel.app/",
     layout: "left"
   }
 ];
