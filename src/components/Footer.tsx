@@ -108,13 +108,13 @@ export default function Footer() {
         className="bg-[#171717] pt-20 pb-8 border-t border-white/5 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 pb-16">
-            
+
             {/* Studio Info */}
             <div className="space-y-4 col-span-1 md:col-span-2">
               <span className="font-display uppercase text-2xl tracking-tight text-white block">
-                CONVERGE
+                CONVERGE DIGITALS
               </span>
               <p className="body-default text-[#A1A1AA] max-w-sm">
                 A creative studio built for brands that refuse to look ordinary. We obsess over strategy, typography, space, and motion.
@@ -135,10 +135,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="tel:+14155552683"
+                    href="tel:+911234567890"
                     className="caption text-[#A1A1AA] hover:text-white transition-colors duration-300"
                   >
-                    +1 (415) 555-CONV
+                    +91 1234567890
                   </a>
                 </li>
               </ul>
@@ -188,7 +188,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-8 text-[#A1A1AA] caption">
             <p>© {new Date().getFullYear()} Converge Creative Agency. All rights reserved.</p>
             <p className="mt-2 sm:mt-0 flex items-center">
-              <span>San Francisco, CA — Tokyo, JP</span>
+              <span>INDIA</span>
             </p>
           </div>
 
