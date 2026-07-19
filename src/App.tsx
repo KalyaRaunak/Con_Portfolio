@@ -116,10 +116,71 @@ function StatBlock({ target, suffix, label }: StatBlockProps) {
 
   return (
     <div ref={ref} className="border-t border-white/5 pt-6">
-      <div className="font-display text-4xl md:text-5xl lg:text-6xl text-white">
+      <div className="font-display text-4xl md:text-5xl lg:text-6xl text-[#EA580C]">
         {count}{suffix}
       </div>
       <p className="caption text-[#A1A1AA] mt-2 uppercase">{label}</p>
+    </div>
+  );
+}
+
+function TorchLogoReveal() {
+  const [isOn, setIsOn] = useState(false);
+
+  return (
+    <div className="relative w-full flex-1 min-h-[350px] lg:min-h-[400px] flex flex-col items-center justify-center space-y-8 select-none mt-4">
+      {/* Custom Mechanical Toggle Switch */}
+      <div className="toggle-container">
+        <input
+          className="toggle-input"
+          type="checkbox"
+          checked={isOn}
+          onChange={(e) => setIsOn(e.target.checked)}
+        />
+        <div className="toggle-handle-wrapper">
+          <div className="toggle-handle">
+            <div className="toggle-handle-knob"></div>
+            <div className="toggle-handle-bar-wrapper">
+              <div className="toggle-handle-bar"></div>
+            </div>
+          </div>
+        </div>
+        <div className="toggle-base">
+          <div className="toggle-base-inside"></div>
+        </div>
+      </div>
+
+      {/* Logo container */}
+      <div className="relative w-full max-w-sm h-[420px] flex items-center justify-center">
+        {/* Glowing Logo */}
+        <div
+          className="absolute inset-0 bg-white transition-all duration-500 ease-out"
+          style={{
+            maskImage: "url(/images/logo.png)",
+            WebkitMaskImage: "url(/images/logo.png)",
+            maskSize: "contain",
+            WebkitMaskSize: "contain",
+            maskPosition: "center",
+            WebkitMaskPosition: "center",
+            maskRepeat: "no-repeat",
+            WebkitMaskRepeat: "no-repeat",
+            opacity: isOn ? 0.95 : 0,
+            transform: isOn ? "scale(1.05) rotate(0deg)" : "scale(0.9) rotate(-5deg)",
+            filter: isOn ? "drop-shadow(0 0 25px rgba(255,255,255,0.15))" : "none",
+          }}
+        />
+
+        {/* Offline Placeholder */}
+        <div
+          className={`absolute inset-0 border border-dashed border-white/5 rounded-3xl flex items-center justify-center transition-opacity duration-500 ${
+            isOn ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        >
+          <span className="text-[10px] eyebrow text-white/10 uppercase tracking-widest">
+            Offline
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -188,6 +249,26 @@ export default function App() {
           scrub: true
         }
       });
+
+      // 4. About paragraph text highlight scrub effect
+      const aboutWords = document.querySelectorAll(".about-word");
+      if (aboutWords.length > 0) {
+        gsap.fromTo(
+          aboutWords,
+          { color: "rgba(161, 161, 170, 0.25)" },
+          {
+            color: "#EA580C",
+            stagger: 0.1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: "#about-paragraph-text",
+              start: "top 80%",
+              end: "bottom 50%",
+              scrub: true,
+            }
+          }
+        );
+      }
     });
 
     // Fade out scroll cue on first user scroll action
@@ -318,18 +399,32 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
             
             {/* Left column large statement */}
-            <div className="lg:col-span-6 flex flex-col justify-start">
-              <span className="eyebrow text-[#EA580C] uppercase block mb-6">About Us</span>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#F5F5F5] uppercase tracking-tight leading-[0.95] max-w-xl">
-                We don't sell packages. We build the thing your competitors will screenshot.
-              </h2>
+            <div className="lg:col-span-6 flex flex-col justify-between">
+              <div>
+                <span className="eyebrow text-[#EA580C] uppercase block mb-6">About Us</span>
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#F5F5F5] uppercase tracking-tight leading-[0.95] max-w-xl">
+                  We don't sell packages. We build the thing your competitors will screenshot.
+                </h2>
+              </div>
+              <TorchLogoReveal />
             </div>
 
             {/* Right column supporting copy + stats grid */}
             <div className="lg:col-span-6 lg:border-l lg:border-white/5 lg:pl-16 flex flex-col justify-between">
-              <p className="body-large text-[#A1A1AA] leading-relaxed max-w-xl mb-16">
-                Converge started as a two-person team frustrated with agencies that shipped the same templated site to every client with a different logo pasted on top. We work differently: small enough to obsess over every pixel, senior enough to think past the pixel — into strategy, motion, and the systems that keep a brand consistent long after launch. Every project gets a point of view before it gets a Figma file.
+              <p id="about-paragraph-text" className="body-large leading-relaxed max-w-xl mb-16 select-none">
+                {"Converge started as a two-person team frustrated with agencies that shipped the same templated site to every client with a different logo pasted on top. We work differently: small enough to obsess over every pixel, senior enough to think past the pixel — into strategy, motion, and the systems that keep a brand consistent long after launch. Every project gets a point of view before it gets a Figma file."
+                  .split(" ")
+                  .map((word, idx) => (
+                    <span
+                      key={idx}
+                      className="about-word inline-block mr-[0.25em] text-white/20 transition-colors duration-300"
+                    >
+                      {word}
+                    </span>
+                  ))}
               </p>
+
+
 
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-8 md:gap-12">

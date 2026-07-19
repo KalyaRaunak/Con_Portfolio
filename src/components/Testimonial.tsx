@@ -22,8 +22,8 @@ export default function Testimonial() {
         {
           y: 0,
           opacity: 1,
-          duration: 1.0,
-          stagger: 0.15,
+          duration: 0.5,
+          stagger: 0.08,
           ease: "power3.out",
           scrollTrigger: {
             trigger: content,

@@ -62,6 +62,7 @@ export default function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const mobileProgressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Respect user's motion preference
@@ -78,21 +79,42 @@ export default function Timeline() {
         // Mobile vertical scroll reveal
         const mobileSteps = container.querySelectorAll(".timeline-step-mobile");
         mobileSteps.forEach((step) => {
-          gsap.fromTo(
-            step,
+          const number = step.querySelector(".timeline-number-mobile");
+
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: step,
+              start: "top 85%",
+              end: "top 55%",
+              scrub: true,
+            }
+          })
+          .fromTo(step,
             { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, ease: "power1.out" }, 0)
+          .fromTo(number,
+            { color: "rgba(234, 88, 12, 0.4)", filter: "drop-shadow(0 0 0px rgba(234, 88, 12, 0))" },
+            { color: "#EA580C", filter: "drop-shadow(0 0 8px rgba(234, 88, 12, 0.4))", ease: "power1.out" }, 0);
+        });
+
+        // Active vertical line progress animation on mobile
+        const mobileProgressBar = mobileProgressBarRef.current;
+        if (mobileProgressBar) {
+          gsap.fromTo(
+            mobileProgressBar,
+            { scaleY: 0 },
             {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
+              scaleY: 1,
+              ease: "none",
               scrollTrigger: {
-                trigger: step,
-                start: "top 85%",
-                toggleActions: "play none none none",
+                trigger: mobileProgressBar.parentElement,
+                start: "top 75%",
+                end: "bottom 75%",
+                scrub: true,
               }
             }
           );
-        });
+        }
         return;
       }
 
@@ -214,13 +236,20 @@ export default function Timeline() {
           <h2 className="section-headline text-white uppercase">How We Work</h2>
         </div>
 
-        <div className="relative pl-8 space-y-16 before:absolute before:left-[15px] before:top-2 before:bottom-2 before:w-[2px] before:bg-white/5">
+        <div className="relative pl-8 space-y-16">
+          {/* Vertical progress line background */}
+          <div className="absolute left-[15px] top-2 bottom-2 w-[2px] bg-white/5 z-0" />
+          
+          {/* Active vertical progress line */}
+          <div 
+            ref={mobileProgressBarRef}
+            className="absolute left-[15px] top-2 w-[2px] bg-[#EA580C] origin-top scale-y-0 z-10"
+            style={{ height: "calc(100% - 16px)" }}
+          />
+
           {STEPS.map((step) => (
             <div key={step.id} className="timeline-step-mobile relative flex flex-col items-start text-left">
-              {/* Indicator dot */}
-              <div className="absolute -left-[31px] top-1 w-6 h-6 rounded-full bg-[#0F0F10] border-2 border-[#EA580C] flex items-center justify-center z-10" />
-
-              <div className="font-display text-5xl text-[#EA580C]/40 leading-none select-none">
+              <div className="font-display text-5xl text-[#EA580C]/40 leading-none select-none timeline-number-mobile">
                 {step.num}
               </div>
 

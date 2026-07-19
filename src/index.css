@@ -101,6 +101,12 @@ html.lenis, html.lenis body {
   min-width: 100%;
 }
 
+@media (max-width: 1023px) {
+  .marquee-content {
+    animation: marquee-scroll 6s linear infinite;
+  }
+}
+
 @keyframes marquee-scroll {
   0% {
     transform: translateX(0%);
@@ -181,4 +187,112 @@ html.lenis, html.lenis body {
 .animate-orbit {
   animation: orbit var(--duration) linear infinite;
   animation-delay: var(--delay);
+}
+
+/* 3D Mechanical Lever Toggle Switch */
+.toggle-container {
+  position: relative;
+  width: 90px;
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Horizontal slot track at the bottom */
+.toggle-base {
+  position: absolute;
+  bottom: 4px;
+  width: 64px;
+  height: 14px;
+  background-color: #4a4a4a;
+  border: 3px solid #e0e0e0;
+  border-radius: 9999px;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.6), 
+    0 2px 4px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.toggle-base-inside {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+}
+
+.toggle-handle-wrapper {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  height: 48px;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-handle {
+  position: relative;
+  width: 24px;
+  height: 100%;
+  transform-origin: bottom center;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.1);
+  transform: translateX(-10px) rotate(-22deg);
+}
+
+/* Move and rotate lever to the right when checked */
+.toggle-input:checked ~ .toggle-handle-wrapper .toggle-handle {
+  transform: translateX(10px) rotate(22deg);
+}
+
+/* Shiny 3D Red Ball */
+.toggle-handle-knob {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff6666 0%, #d61c1c 45%, #990000 80%, #660000 100%);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.4), 
+    inset 0 -2px 5px rgba(0, 0, 0, 0.3),
+    inset 0 2px 5px rgba(255, 255, 255, 0.5);
+  z-index: 4;
+}
+
+.toggle-handle-bar-wrapper {
+  position: absolute;
+  top: 22px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Chrome metal rod */
+.toggle-handle-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #aeaeae 0%, #f3f3f3 30%, #9e9e9e 70%, #5c5c5c 100%);
+  border-radius: 2px;
+  box-shadow: inset 1px 0 2px rgba(255,255,255,0.4), 1px 2px 3px rgba(0,0,0,0.3);
+  z-index: 3;
 }

@@ -99,7 +99,9 @@ export default function CategoryOverview() {
                 {/* Row Main Line */}
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col md:flex-row md:items-baseline md:gap-8">
-                    <span className="font-display text-4xl md:text-6xl lg:text-7xl uppercase text-[#F5F5F5] group-hover:text-white transition-colors duration-300">
+                    <span className={`font-display text-4xl md:text-6xl lg:text-7xl uppercase group-hover:text-[#EA580C] transition-colors duration-300 ${
+                      isExpanded ? "text-[#EA580C]" : "text-[#F5F5F5]"
+                    }`}>
                       {cat.title}
                     </span>
                     {/* Project Count (Visible on hover on desktop, always visible on mobile/active) */}

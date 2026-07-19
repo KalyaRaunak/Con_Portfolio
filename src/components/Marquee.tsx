@@ -1,4 +1,6 @@
 
+import { useState } from "react";
+
 const CLIENTS = [
   { name: "NILGIRI CO.", id: 1 },
   { name: "VELUNOR LUXURY", id: 2 },
@@ -13,6 +15,14 @@ const CLIENTS = [
 export default function Marquee() {
   // Duplicate list to ensure seamless infinite looping
   const doubleClients = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS];
+  const [tappedIndices, setTappedIndices] = useState<Record<number, boolean>>({});
+
+  const handleTap = (idx: number) => {
+    setTappedIndices((prev) => ({
+      ...prev,
+      [idx]: !prev[idx],
+    }));
+  };
 
   return (
     <section className="bg-[#171717] border-y border-white/5 py-12 md:py-16 overflow-hidden">
@@ -28,9 +38,14 @@ export default function Marquee() {
           {doubleClients.map((client, idx) => (
             <div
               key={`${client.name}-${idx}`}
+              onClick={() => handleTap(idx)}
               className="logo-item flex-shrink-0 cursor-pointer select-none transition-all duration-500 hover:scale-105"
             >
-              <span className="font-display text-4xl md:text-5xl tracking-tighter text-white/40 hover:text-[#EA580C] hover:opacity-100 transition-all duration-300">
+              <span className={`font-display text-4xl md:text-5xl tracking-tighter transition-all duration-300 ${
+                tappedIndices[idx]
+                  ? "text-[#EA580C] opacity-100"
+                  : "text-white/40 hover:text-[#EA580C] hover:opacity-100"
+              }`}>
                 {client.name}
               </span>
             </div>

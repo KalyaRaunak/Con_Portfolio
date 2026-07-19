@@ -25,12 +25,8 @@ export default function Navbar() {
         setIsScrolled(false);
       }
 
-      // Hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY.current && currentScrollY > 150) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
+      // Keep navbar always visible (static / fixed position) on scroll
+      setIsVisible(true);
 
       lastScrollY.current = currentScrollY;
     };

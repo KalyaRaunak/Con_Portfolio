@@ -24,57 +24,68 @@ export default function TechEcosystem() {
 
         {/* Orbiting Circles Container */}
         <div className="relative flex h-[500px] w-full max-w-xl items-center justify-center overflow-hidden rounded-lg bg-transparent">
-          {/* Central Logo Text */}
-          <span className="pointer-events-none select-none whitespace-pre-wrap bg-gradient-to-b from-white to-white/40 bg-clip-text text-center text-5xl md:text-7xl font-display uppercase tracking-widest font-semibold leading-none text-transparent z-10">
-            CONVERGE
-          </span>
+          {/* Central Logo Icon */}
+          <div 
+            className="w-16 h-22 md:w-20 md:h-28 bg-white hover:bg-[#EA580C] transition-colors duration-300 z-10 cursor-pointer"
+            style={{
+              maskImage: "url(/images/logo.png)",
+              WebkitMaskImage: "url(/images/logo.png)",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat"
+            }}
+          />
 
-          {/* Inner Circles (radius: 80, duration: 20s) */}
+          {/* Inner Circles (radius: 90, duration: 20s) - Standardized size to 48px */}
           <OrbitingCircles
-            className="size-[40px] border-none bg-transparent"
+            className="size-[48px] border-none bg-transparent"
             duration={20}
             delay={-20}
             radius={90}
-            iconSize={40}
+            iconSize={48}
           >
             <Icons.whatsapp />
           </OrbitingCircles>
           <OrbitingCircles
-            className="size-[40px] border-none bg-transparent"
+            className="size-[48px] border-none bg-transparent"
             duration={20}
             delay={-10}
             radius={90}
-            iconSize={40}
+            iconSize={48}
           >
             <Icons.notion />
           </OrbitingCircles>
           <OrbitingCircles
-            className="size-[40px] border-none bg-transparent"
+            className="size-[48px] border-none bg-transparent"
             duration={20}
             delay={-5}
             radius={90}
-            iconSize={40}
+            iconSize={48}
           >
             <Icons.openai />
           </OrbitingCircles>
 
-          {/* Outer Circles (radius: 190, duration: 20s, reverse) */}
+          {/* Outer Circles (radius: 190, duration: 20s, reverse) - Standardized size to 48px & mismatched delays */}
           <OrbitingCircles
-            className="size-[50px] border-none bg-transparent"
+            className="size-[48px] border-none bg-transparent"
             radius={190}
             duration={20}
+            delay={-3}
             reverse
-            iconSize={50}
+            iconSize={48}
           >
             <Icons.googleDrive />
           </OrbitingCircles>
           <OrbitingCircles
-            className="size-[50px] border-none bg-transparent"
+            className="size-[48px] border-none bg-transparent"
             radius={190}
             duration={20}
-            delay={-10}
+            delay={-15}
             reverse
-            iconSize={50}
+            iconSize={48}
           >
             <Icons.gitHub />
           </OrbitingCircles>
@@ -95,10 +106,10 @@ const Icons = {
     </div>
   ),
   notion: () => (
-    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
+    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
       <svg
-        width="20"
-        height="20"
+        width="24"
+        height="24"
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -118,10 +129,10 @@ const Icons = {
     </div>
   ),
   openai: () => (
-    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
+    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
       <svg
-        width="20"
-        height="20"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         className="fill-current stroke-current"
@@ -131,7 +142,7 @@ const Icons = {
     </div>
   ),
   googleDrive: () => (
-    <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
+    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
       <svg
         width="24"
         height="24"
@@ -167,10 +178,10 @@ const Icons = {
     </div>
   ),
   whatsapp: () => (
-    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
+    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#171717] border border-white/5 text-[#A1A1AA] hover:text-[#EA580C] hover:border-[#EA580C]/30 transition-colors duration-300">
       <svg
-        width="20"
-        height="20"
+        width="24"
+        height="24"
         viewBox="0 0 175.216 175.552"
         xmlns="http://www.w3.org/2000/svg"
         className="fill-current"

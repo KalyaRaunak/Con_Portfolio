@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,6 +9,19 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Footer() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -206,6 +219,17 @@ export default function Footer() {
 
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      <button
+        onClick={handleBackToTop}
+        className={`fixed bottom-24 right-6 z-[999] bg-[#171717]/85 backdrop-blur-md border border-white/10 text-white hover:bg-[#EA580C] hover:border-[#EA580C] p-4 rounded-full shadow-2xl transition-all duration-500 flex items-center justify-center group cursor-pointer ${
+          showScrollTop ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" />
+      </button>
 
       {/* Floating WhatsApp Action Button */}
       <a
