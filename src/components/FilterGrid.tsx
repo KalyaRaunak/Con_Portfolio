@@ -13,21 +13,21 @@ const PROJECTS: FilterProject[] = [
   {
     id: "ocean-blue",
     title: "Ocean Blue Education",
-    category: "Marketing",
+    category: "Website",
     service: "Coaching Institute Web & Ad Campaigns",
     image: "/images/ocean_blue.png"
   },
   {
     id: "stheer-uk",
     title: "STHEER UK",
-    category: "AI Creative",
+    category: "Website",
     service: "Digital Solutions & UI Architecture",
     image: "/images/stheer_uk.png"
   },
   {
     id: "mahesh-masala",
     title: "Mahesh Masala",
-    category: "Branding",
+    category: "Website",
     service: "Spices Brand Identity & Store",
     image: "/images/mahesh_masala.png"
   },
@@ -41,21 +41,21 @@ const PROJECTS: FilterProject[] = [
   {
     id: "ssi",
     title: "SSI",
-    category: "Automation",
+    category: "Website",
     service: "Coaching Institute Enrollment Systems",
     image: "/images/ssi_education.png"
   },
   {
     id: "enki",
     title: "ENKI",
-    category: "Branding",
+    category: "Website",
     service: "Organic Mushroom Branding & Design",
     image: "/images/enki_mushrooms.png"
   },
   {
     id: "ganpati-computers",
     title: "Ganpati Computers",
-    category: "Automation",
+    category: "Website",
     service: "IT Repair Booking & CRM Pipelines",
     image: "/images/ganpati_computers.png"
   }
