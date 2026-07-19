@@ -64,23 +64,45 @@ export default function Timeline() {
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Respect user's motion preference or if mobile viewport
+    // Respect user's motion preference
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.innerWidth < 1024;
 
-    if (prefersReducedMotion || isMobile) return;
+    if (prefersReducedMotion) return;
 
     const container = containerRef.current;
-    const horizontal = horizontalRef.current;
-    const progressBar = progressBarRef.current;
-
-    if (!container || !horizontal || !progressBar) return;
-
-    // Calculate the horizontal scroll amount
-    // Total width of the horizontal element minus the window width
-    const scrollWidth = horizontal.scrollWidth - window.innerWidth;
+    if (!container) return;
 
     const ctx = gsap.context(() => {
+      if (isMobile) {
+        // Mobile vertical scroll reveal
+        const mobileSteps = container.querySelectorAll(".timeline-step-mobile");
+        mobileSteps.forEach((step) => {
+          gsap.fromTo(
+            step,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              scrollTrigger: {
+                trigger: step,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              }
+            }
+          );
+        });
+        return;
+      }
+
+      const horizontal = horizontalRef.current;
+      const progressBar = progressBarRef.current;
+      if (!horizontal || !progressBar) return;
+
+      // Calculate the horizontal scroll amount
+      const scrollWidth = horizontal.scrollWidth - window.innerWidth;
+
       const pinTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -104,21 +126,20 @@ export default function Timeline() {
         ease: "none"
       }, 0);
 
-      // Stagger steps opacity and scale as they enter view
+      // Fade-up animation as steps enter view (starts from opacity 0 for sequence effect)
       const steps = horizontal.querySelectorAll(".timeline-step");
       steps.forEach((step) => {
         gsap.fromTo(
           step,
-          { opacity: 0.3, y: 30 },
+          { opacity: 0, y: 50 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
             scrollTrigger: {
               trigger: step,
-              containerAnimation: pinTimeline, // syncs with horizontal scrolling trigger
+              containerAnimation: pinTimeline,
               start: "left 85%",
-              end: "left 45%",
+              end: "left 55%",
               scrub: true,
             }
           }
@@ -160,7 +181,7 @@ export default function Timeline() {
               className="timeline-step w-[350px] flex-shrink-0 relative flex flex-col justify-center select-none"
             >
               {/* Step number */}
-              <div className="font-display text-[#EA580C] text-8xl leading-none select-none select-none">
+              <div className="font-display text-[#EA580C] text-8xl leading-none select-none">
                 {step.num}
               </div>
               
@@ -195,7 +216,7 @@ export default function Timeline() {
 
         <div className="relative pl-8 space-y-16 before:absolute before:left-[15px] before:top-2 before:bottom-2 before:w-[2px] before:bg-white/5">
           {STEPS.map((step) => (
-            <div key={step.id} className="relative flex flex-col items-start text-left">
+            <div key={step.id} className="timeline-step-mobile relative flex flex-col items-start text-left">
               {/* Indicator dot */}
               <div className="absolute -left-[31px] top-1 w-6 h-6 rounded-full bg-[#0F0F10] border-2 border-[#EA580C] flex items-center justify-center z-10" />
 
