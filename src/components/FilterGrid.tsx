@@ -11,46 +11,53 @@ interface FilterProject {
 
 const PROJECTS: FilterProject[] = [
   {
-    id: "nilgiri",
-    title: "Nilgiri Co",
-    category: "Website",
-    service: "E-Commerce & Branding",
-    image: "/images/nilgiri_co.png"
-  },
-  {
-    id: "velunor",
-    title: "Velunor Perfume",
-    category: "AI Creative",
-    service: "Art Direction & AI Art",
-    image: "/images/velunor_perfume.png"
-  },
-  {
     id: "ocean-blue",
     title: "Ocean Blue Education",
     category: "Marketing",
-    service: "Campaigns & Marketing",
+    service: "Coaching Institute Web & Ad Campaigns",
     image: "/images/ocean_blue.png"
   },
   {
-    id: "scoope",
-    title: "Scoopé Ice Cream",
+    id: "stheer-uk",
+    title: "STHEER UK",
+    category: "AI Creative",
+    service: "Digital Solutions & UI Architecture",
+    image: "/images/stheer_uk.png"
+  },
+  {
+    id: "mahesh-masala",
+    title: "Mahesh Masala",
     category: "Branding",
-    service: "Identity & Web Design",
-    image: "/images/scoope_icecream.png"
+    service: "Spices Brand Identity & Store",
+    image: "/images/mahesh_masala.png"
   },
   {
-    id: "gayatri",
-    title: "Gayatri Stitching",
-    category: "Automation",
-    service: "Web Platform & CRM",
-    image: "/images/gayatri_stitching.png"
-  },
-  {
-    id: "vns",
+    id: "vns-hostel",
     title: "VNS Hostel",
     category: "Website",
-    service: "UI/UX & Web Dev",
+    service: "Student Accommodation Booking Platform",
     image: "/images/vns_hostel.png"
+  },
+  {
+    id: "ssi",
+    title: "SSI",
+    category: "Automation",
+    service: "Coaching Institute Enrollment Systems",
+    image: "/images/ssi_education.png"
+  },
+  {
+    id: "enki",
+    title: "ENKI",
+    category: "Branding",
+    service: "Organic Mushroom Branding & Design",
+    image: "/images/enki_mushrooms.png"
+  },
+  {
+    id: "ganpati-computers",
+    title: "Ganpati Computers",
+    category: "Automation",
+    service: "IT Repair Booking & CRM Pipelines",
+    image: "/images/ganpati_computers.png"
   }
 ];
 

@@ -22,70 +22,81 @@ gsap.registerPlugin(ScrollTrigger);
 // Project mock data conforming to spec requirements
 const FEATURED_PROJECTS: Project[] = [
   {
-    id: "nilgiri",
-    name: "Nilgiri Co",
-    industry: "Food & Beverage",
-    services: ["Website Design", "Development"],
-    year: "2025",
-    description: "An elegant, sensory digital experience for an organic single-origin tea estate from the Nilgiri hills. Designed with heavy editorial layouts and micro-interactions.",
-    image: "/images/nilgiri_co.png",
-    link: "#",
-    layout: "left"
-  },
-  {
     id: "ocean-blue",
     name: "Ocean Blue Education",
     industry: "Education",
     services: ["Website Design", "Branding"],
     year: "2025",
-    description: "A premium, accessible portal designed to deliver high-quality oceanic research curriculum. Built with high-fidelity animations, a strict color system, and full responsiveness.",
+    description: "A premium coaching portal built with tailored curriculum maps, conversion layouts, and a strict oceanic typography system. Delivering accessible, high-performance learning resources.",
     image: "/images/ocean_blue.png",
-    link: "#",
+    link: "https://www.oceanblueeducation.com",
+    layout: "left"
+  },
+  {
+    id: "stheer-uk",
+    name: "STHEER UK",
+    industry: "Digital Solutions",
+    services: ["Website Design", "UI/UX"],
+    year: "2025",
+    description: "Bespoke digital architecture for a United Kingdom-based technology company. Optimized for massive loading speed, accessibility, and modern aesthetic animations.",
+    image: "/images/stheer_uk.png",
+    link: "https://www.stheer.co.uk",
     layout: "right"
   },
   {
-    id: "vns",
+    id: "mahesh-masala",
+    name: "Mahesh Masala",
+    industry: "Food & Beverage",
+    services: ["Branding", "Website Design"],
+    year: "2025",
+    description: "Artisanal packaging, digital branding, and online commerce platform for a heritage spices manufacturer, connecting traditional taste with modern digital design.",
+    image: "/images/mahesh_masala.png",
+    link: "https://maheshmasalagruhudhyog.com",
+    layout: "left"
+  },
+  {
+    id: "vns-hostel",
     name: "VNS Hostel",
     industry: "Hospitality",
     services: ["Website Design", "UI/UX"],
     year: "2024",
-    description: "Modern web experiences and automated booking systems designed for a luxury capsule hostel. Features sleek geometric typography and architectural photo grids.",
+    description: "Modern student housing booking engine and responsive catalog layout. Built with sleek geometric grids to simplify reservation flows and room previews.",
     image: "/images/vns_hostel.png",
-    link: "#",
-    layout: "left"
-  },
-  {
-    id: "scoope",
-    name: "Scoopé Ice Cream",
-    industry: "Food & Beverage",
-    services: ["Branding", "Website Design"],
-    year: "2024",
-    description: "Vibrant, high-contrast visual brand identity and web shop mockups for a craft ice cream company. Minimal styling mixed with bold uppercase typography.",
-    image: "/images/scoope_icecream.png",
-    link: "#",
+    link: "https://vns-tau.vercel.app/",
     layout: "right"
   },
   {
-    id: "velunor",
-    name: "Velunor Perfume",
-    industry: "Retail / Luxury",
-    services: ["Branding", "AI Creative"],
-    year: "2025",
-    description: "AI-driven art direction and high-end visual concepts for an artisanal perfume house. Obsessive attention to light, mist, glass refraction, and minimalism.",
-    image: "/images/velunor_perfume.png",
-    link: "#",
-    layout: "left"
-  },
-  {
-    id: "gayatri",
-    name: "Gayatri Stitching",
-    industry: "Local Business / Services",
+    id: "ssi",
+    name: "SSI",
+    industry: "Education",
     services: ["Website Design", "Automation"],
     year: "2024",
-    description: "Web platform and backend automation pipelines for a bespoke clothing design studio, streamlining tailoring booking and digital catalog updates.",
-    image: "/images/gayatri_stitching.png",
-    link: "#",
+    description: "A powerful coaching portal integrated with enrollment automation, automatic schedule updates, and a custom student portal.",
+    image: "/images/ssi_education.png",
+    link: "https://ssi-tau.vercel.app/",
+    layout: "left"
+  },
+  {
+    id: "enki",
+    name: "ENKI",
+    industry: "Retail & Agriculture",
+    services: ["Branding", "Website Design"],
+    year: "2024",
+    description: "Organic visual identity and digital catalog for a premium mushroom farm and supplement brand, focusing on natural textures and earthy color tones.",
+    image: "/images/enki_mushrooms.png",
+    link: "https://enki-bay.vercel.app/",
     layout: "right"
+  },
+  {
+    id: "ganpati-computers",
+    name: "Ganpati Computers",
+    industry: "IT Services & Retail",
+    services: ["Website Design", "Automation"],
+    year: "2024",
+    description: "Responsive web platform and automated repair booking workflows for a retail computer seller and repair service center, optimizing client communications.",
+    image: "/images/ganpati_computers.png",
+    link: "https://ganpati-computers.vercel.app/",
+    layout: "left"
   }
 ];
 
