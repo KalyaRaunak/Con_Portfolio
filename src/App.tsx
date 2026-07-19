@@ -13,7 +13,7 @@ import type { Project } from "./components/ProjectCard";
 
 import FilterGrid from "./components/FilterGrid";
 import Timeline from "./components/Timeline";
-import Testimonial from "./components/Testimonial";
+import Testimonial from "@/components/ui/demo";
 import Footer from "./components/Footer";
 
 // Register ScrollTrigger
