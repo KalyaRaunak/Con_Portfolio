@@ -7,56 +7,70 @@ interface CategoryItem {
   count: string;
   description: string;
   image: string;
+  filter: string;
 }
 
 const CATEGORIES: CategoryItem[] = [
   {
     id: 1,
     title: "Websites",
-    count: "08 Projects",
+    count: "09 Projects",
     description: "Immersive custom digital platforms built with premium spacing, speed, and motion design.",
-    image: "/images/nilgiri_co.png"
+    image: "/images/nilgiri_co.png",
+    filter: "Website"
   },
   {
     id: 2,
     title: "Brand Identity",
-    count: "04 Projects",
+    count: "10 Projects",
     description: "Holistic visual systems, curated typography, and bespoke design guidelines for creative labels.",
-    image: "/images/scoope_icecream.png"
+    image: "/images/scoope_icecream.png",
+    filter: "Branding"
   },
   {
     id: 3,
     title: "AI Creatives",
-    count: "03 Projects",
+    count: "05 Projects",
     description: "Cutting-edge AI-assisted generation, art direction, and product photography visualization.",
-    image: "/images/velunor_perfume.png"
+    image: "/images/velunor_perfume.png",
+    filter: "AI Creative"
   },
   {
     id: 4,
     title: "Social Media Management",
     count: "05 Projects",
     description: "Organic growth campaigns, content creation, brand positioning, and social channel design.",
-    image: "/images/ocean_blue.png"
+    image: "/images/ocean_blue.png",
+    filter: "Marketing"
   },
   {
     id: 5,
     title: "AI & SaaS Products",
     count: "06 Projects",
     description: "End-to-end product strategy, frontend interfaces, SaaS dashboards, and AI application engineering.",
-    image: "/images/stheer_uk.png"
+    image: "/images/stheer_uk.png",
+    filter: "Automation"
   }
 ];
 
-export default function CategoryOverview() {
+interface CategoryOverviewProps {
+  onSelectCategory?: (filter: string) => void;
+}
+
+export default function CategoryOverview({ onSelectCategory }: CategoryOverviewProps) {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const handleRowClick = (id: number) => {
+  const handleRowClick = (cat: CategoryItem) => {
     // Accordion toggle behavior on mobile/tablet click
-    if (expandedId === id) {
+    if (expandedId === cat.id) {
       setExpandedId(null);
     } else {
-      setExpandedId(id);
+      setExpandedId(cat.id);
+    }
+
+    if (onSelectCategory) {
+      onSelectCategory(cat.filter);
     }
   };
 
@@ -90,7 +104,7 @@ export default function CategoryOverview() {
                 key={cat.id}
                 onMouseEnter={() => setHoveredId(cat.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                onClick={() => handleRowClick(cat.id)}
+                onClick={() => handleRowClick(cat)}
                 className={`relative border-b border-white/5 py-8 md:py-12 px-2 md:px-6 cursor-pointer transition-colors duration-500 hover:bg-[#171717] group ${
                   isExpanded ? "bg-[#171717]" : ""
                 }`}

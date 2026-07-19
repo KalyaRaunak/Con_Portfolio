@@ -205,17 +205,33 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Giant low-opacity background wordmark at the bottom - echoing the hero glow bookend */}
-          <div className="w-full text-center select-none pointer-events-none mt-12 overflow-hidden flex items-center justify-center relative">
+          {/* Divider above wordmark */}
+          <div className="border-t border-white/5 mt-8" />
+
+          {/* Giant Orange Wordmark */}
+          <div className="w-full text-center select-none py-6 overflow-hidden flex items-center justify-center">
             <span
-              className="font-display text-[#EA580C] opacity-15 blur-[60px] md:blur-[100px] select-none leading-none tracking-tighter uppercase inline-block translate-y-4"
+              className="font-body font-black text-[#EA580C] select-none leading-none tracking-tighter uppercase inline-block"
               style={{
-                fontSize: "clamp(120px, 24vw, 440px)",
+                fontSize: "clamp(48px, 17vw, 220px)",
               }}
             >
               CONVERGE
             </span>
           </div>
+
+          {/* Divider below wordmark */}
+          <div className="border-t border-white/5" />
+
+          {/* Bottom metadata links: Portfolio, Year, Proudly Indian */}
+          <div className="py-6 grid grid-cols-3 items-center text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] font-bold text-[#EA580C]">
+            <span className="text-left">PORTFOLIO</span>
+            <span className="text-center">2026</span>
+            <span className="text-right">PROUDLY INDIAN</span>
+          </div>
+
+          {/* Divider below metadata links */}
+          <div className="border-t border-white/5 mb-6" />
 
         </div>
       </footer>

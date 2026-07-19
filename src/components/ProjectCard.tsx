@@ -14,6 +14,7 @@ export interface Project {
   year: string;
   description: string;
   image: string;
+  video?: string;
   link: string;
   layout: "left" | "right";
 }
@@ -25,7 +26,8 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const mediaRef = useRef<HTMLImageElement | HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,10 +37,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
     const container = containerRef.current;
     const imageWrapper = imageWrapperRef.current;
-    const image = imageRef.current;
+    const media = mediaRef.current;
     const text = textRef.current;
 
-    if (!container || !imageWrapper || !image || !text) return;
+    if (!container || !imageWrapper || !media || !text) return;
 
     // Create a GSAP Context to handle responsive/scoped animation cleanups automatically
     const ctx = gsap.context(() => {
@@ -58,9 +60,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         }
       );
 
-      // 2. Parallax scale on scroll: image goes from 1.15 to 1.0 as container moves through viewport
+      // 2. Parallax scale on scroll: media goes from 1.15 to 1.0 as container moves through viewport
       gsap.fromTo(
-        image,
+        media,
         { scale: 1.15 },
         {
           scale: 1.0,
@@ -95,6 +97,62 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
     return () => ctx.revert();
   }, [project]);
+
+  // Autoplay / Hover video logic
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const hasHover = window.matchMedia("(hover: hover)").matches;
+    let observer: IntersectionObserver | null = null;
+
+    if (!hasHover) {
+      // Mobile behavior: autoplay video when scrolled into view
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              video.play().catch((err) => {
+                console.log("Mobile autoplay failed:", err);
+              });
+            } else {
+              video.pause();
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(video);
+    } else {
+      // Desktop behavior: play on hover, pause/reset on leave
+      const card = containerRef.current;
+      if (card) {
+        const handleMouseEnter = () => {
+          video.play().catch((err) => {
+            console.log("Hover play failed:", err);
+          });
+        };
+        const handleMouseLeave = () => {
+          video.pause();
+          video.currentTime = 0;
+        };
+
+        card.addEventListener("mouseenter", handleMouseEnter);
+        card.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+          card.removeEventListener("mouseenter", handleMouseEnter);
+          card.removeEventListener("mouseleave", handleMouseLeave);
+        };
+      }
+    }
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [project.video]);
 
   return (
     <div
@@ -172,13 +230,29 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             style={{ clipPath: "inset(100% 0% 0% 0%)" }}
             data-cursor="view"
           >
-            <img
-              ref={imageRef}
-              src={project.image}
-              alt={project.name}
-              className="w-full h-full object-cover origin-center scale-115 transition-transform duration-700 ease-out group-hover/card:scale-105"
-              loading="lazy"
-            />
+            {project.video ? (
+              <video
+                ref={(el) => {
+                  (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
+                  (mediaRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
+                }}
+                src={project.video}
+                poster={project.image}
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover origin-center scale-115 transition-transform duration-700 ease-out group-hover/card:scale-105"
+              />
+            ) : (
+              <img
+                ref={mediaRef as React.RefObject<HTMLImageElement>}
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover origin-center scale-115 transition-transform duration-700 ease-out group-hover/card:scale-105"
+                loading="lazy"
+              />
+            )}
           </div>
         </a>
       </div>

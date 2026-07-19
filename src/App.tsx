@@ -30,6 +30,7 @@ const FEATURED_PROJECTS: Project[] = [
     year: "2025",
     description: "A premium coaching portal built with tailored curriculum maps, conversion layouts, and a strict oceanic typography system. Delivering accessible, high-performance learning resources.",
     image: "/images/ocean_blue.png",
+    video: "/videos/ocean-blue.mp4",
     link: "https://www.oceanblueeducation.com",
     layout: "left"
   },
@@ -41,6 +42,7 @@ const FEATURED_PROJECTS: Project[] = [
     year: "2025",
     description: "Bespoke digital architecture for a United Kingdom-based technology company. Optimized for massive loading speed, accessibility, and modern aesthetic animations.",
     image: "/images/stheer_uk.png",
+    video: "/videos/stheer-demo.mp4",
     link: "https://www.stheer.co.uk",
     layout: "right"
   },
@@ -52,6 +54,7 @@ const FEATURED_PROJECTS: Project[] = [
     year: "2025",
     description: "Artisanal packaging, digital branding, and online commerce platform for a heritage spices manufacturer, connecting traditional taste with modern digital design.",
     image: "/images/mahesh_masala.png",
+    video: "/videos/mahesh-masala.mp4",
     link: "https://maheshmasalagruhudhyog.com",
     layout: "left"
   },
@@ -63,6 +66,7 @@ const FEATURED_PROJECTS: Project[] = [
     year: "2024",
     description: "Modern student housing booking engine and responsive catalog layout. Built with sleek geometric grids to simplify reservation flows and room previews.",
     image: "/images/vns_hostel.png",
+    video: "/videos/vns-hostel.mp4",
     link: "https://vns-tau.vercel.app/",
     layout: "right"
   },
@@ -74,7 +78,32 @@ const FEATURED_PROJECTS: Project[] = [
     year: "2024",
     description: "Organic visual identity and digital catalog for a premium mushroom farm and supplement brand, focusing on natural textures and earthy color tones.",
     image: "/images/enki_mushrooms.png",
+    video: "/videos/enki.mp4",
     link: "https://enki-bay.vercel.app/",
+    layout: "left"
+  },
+  {
+    id: "nilgiri",
+    name: "Nilgiri Co.",
+    industry: "Beverage & Wellness",
+    services: ["E-Commerce", "Branding"],
+    year: "2025",
+    description: "A premium organic tea brand experience highlighting direct-from-source agricultural transparency, custom flavor profiling interfaces, and earthy color palettes.",
+    image: "/images/nilgiri_co.png",
+    video: "/videos/nilgiri.mp4",
+    link: "https://nilgiri.co",
+    layout: "right"
+  },
+  {
+    id: "the-mist",
+    name: "THE MIST",
+    industry: "Luxury Retail",
+    services: ["Website Design", "Brand Identity"],
+    year: "2025",
+    description: "An immersive e-commerce destination for a luxury fragrance label, featuring misting micro-animations, sensory product layouts, and editorial typography.",
+    image: "/images/the_mist.png",
+    video: "/videos/the-mist.mp4",
+    link: "https://themistfragrances.com",
     layout: "left"
   }
 ];
@@ -188,6 +217,23 @@ function TorchLogoReveal() {
 export default function App() {
   const heroRef = useRef<HTMLDivElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const handleSelectCategory = (filter: string) => {
+    setActiveFilter(filter);
+    const workSection = document.getElementById("work-section");
+    if (workSection) {
+      workSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleGoBackToCategories = () => {
+    setActiveFilter("All");
+    const servicesSection = document.getElementById("services-section");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     // 1. Lenis smooth scroll setup
@@ -451,7 +497,7 @@ export default function App() {
       <Marquee />
 
       {/* 4. Category Overview */}
-      <CategoryOverview />
+      <CategoryOverview onSelectCategory={handleSelectCategory} />
 
       {/* 5. Featured Projects */}
       <section className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5">
@@ -479,7 +525,11 @@ export default function App() {
       </section>
 
       {/* 6. All Work Filter Grid */}
-      <FilterGrid />
+      <FilterGrid
+        activeFilter={activeFilter}
+        onFilterChange={setActiveFilter}
+        onGoBack={handleGoBackToCategories}
+      />
 
       {/* 7. How We Work Timeline */}
       <Timeline />
