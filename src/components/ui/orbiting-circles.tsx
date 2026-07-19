@@ -19,6 +19,7 @@ export function OrbitingCircles({
   radius = 160,
   path = true,
   iconSize = 30,
+  delay = 0,
 }: OrbitingCirclesProps) {
   const childrenArray = React.Children.toArray(children);
   const totalChildren = childrenArray.length;
@@ -44,8 +45,8 @@ export function OrbitingCircles({
 
       {/* Orbiting Children */}
       {childrenArray.map((child, index) => {
-        // Distribute children evenly by offsetting their start times using negative delay
-        const childDelay = -((index * duration) / totalChildren);
+        // Distribute children and apply the delay offset immediately using negative delays
+        const childDelay = delay - ((index * duration) / (totalChildren || 1));
 
         return (
           <div
