@@ -14,6 +14,7 @@ import type { Project } from "./components/ProjectCard";
 import FilterGrid from "./components/FilterGrid";
 import Timeline from "./components/Timeline";
 import Testimonial from "@/components/ui/demo";
+import TechEcosystem from "./components/TechEcosystem";
 import Footer from "./components/Footer";
 
 // Register ScrollTrigger
@@ -390,6 +391,9 @@ export default function App() {
 
       {/* 8. Testimonial */}
       <Testimonial />
+
+      {/* Orbiting Circles Technology Ecosystem */}
+      <TechEcosystem />
 
       {/* 9 & 10. CTA & Footer (combined layout with WhatsApp FAB) */}
       <Footer />
