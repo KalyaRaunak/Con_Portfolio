@@ -234,10 +234,14 @@ export default function App() {
       >
         {/* Full-bleed motion graphics background with parallax scroll support */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
-          <img
+          <video
             id="hero-bg-media"
-            src="/images/hero_motion_graphics.png"
-            alt="Converge Motion Graphics"
+            src="https://v1.pinimg.com/videos/iht/expMp4/39/26/74/392674ab0ea6f0d621ca88a206dbb76f_720w.mp4"
+            poster="https://i.pinimg.com/videos/thumbnails/originals/39/26/74/392674ab0ea6f0d621ca88a206dbb76f.0000000.jpg"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover scale-115 origin-center"
           />
           {/* Gradients for readability */}
