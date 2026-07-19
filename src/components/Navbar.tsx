@@ -118,7 +118,7 @@ export default function Navbar() {
             className="font-display uppercase text-2xl tracking-tight text-[#F5F5F5] hover:text-[#EA580C] transition-colors duration-300"
             data-cursor="home"
           >
-            CONVERGE
+            CONVERGE DIGITALS
           </a>
 
           {/* Desktop Nav Items */}
