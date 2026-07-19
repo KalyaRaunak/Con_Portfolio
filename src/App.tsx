@@ -353,8 +353,8 @@ export default function App() {
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
           <video
             id="hero-bg-media"
-            src="https://v1.pinimg.com/videos/iht/expMp4/39/26/74/392674ab0ea6f0d621ca88a206dbb76f_720w.mp4"
-            poster="https://i.pinimg.com/videos/thumbnails/originals/39/26/74/392674ab0ea6f0d621ca88a206dbb76f.0000000.jpg"
+            src="https://v1.pinimg.com/videos/mc/720p/a6/bf/96/a6bf96d440c5be35d83cbde371347b6b.mp4"
+            poster="https://i.pinimg.com/videos/thumbnails/originals/a6/bf/96/a6bf96d440c5be35d83cbde371347b6b.0000000.jpg"
             autoPlay
             loop
             muted
