@@ -99,17 +99,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div
       ref={containerRef}
-      className={`gutter-grid gap-y-12 items-center py-20 md:py-32 border-b border-white/5 ${
-        project.layout === "left" ? "" : "md:flex-row-reverse"
-      }`}
+      className="grid grid-cols-12 gap-y-12 md:gap-x-8 lg:gap-x-12 items-center py-20 md:py-32 border-b border-white/5"
     >
       {/* Text Content */}
       <div
         ref={textRef}
         className={`col-span-12 md:col-span-5 flex flex-col justify-center space-y-6 ${
           project.layout === "left" 
-            ? "order-2 md:order-1 md:pr-12" 
-            : "order-2 md:order-2 md:pl-12"
+            ? "order-2 md:order-1 md:pr-4 lg:pr-8" 
+            : "order-2 md:order-2 md:col-start-8 md:pl-4 lg:pl-8"
         }`}
       >
         {/* Meta / Eyebrow */}
@@ -120,9 +118,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Project Name */}
-        <h3 className="card-title text-[#F5F5F5] uppercase tracking-tight animate-reveal">
-          {project.name}
-        </h3>
+        <a href={project.link} target="_blank" rel="noopener noreferrer" className="block group/title">
+          <h3 className="card-title text-[#F5F5F5] group-hover/title:text-[#EA580C] uppercase tracking-tight animate-reveal transition-colors duration-300">
+            {project.name}
+          </h3>
+        </a>
 
         {/* Services Badges */}
         <div className="flex flex-wrap gap-2 animate-reveal">
@@ -158,26 +158,33 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Image Content */}
       <div
-        className={`col-span-12 md:col-span-7 ${
+        className={`col-span-12 md:col-span-6 ${
           project.layout === "left" 
-            ? "order-1 md:order-2" 
-            : "order-1 md:order-1"
+            ? "order-1 md:order-2 md:col-start-7" 
+            : "order-1 md:order-1 md:col-start-1"
         }`}
       >
-        <div
-          ref={imageWrapperRef}
-          className="w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-[20px] md:rounded-[28px] border border-white/5 relative"
-          style={{ clipPath: "inset(100% 0% 0% 0%)" }}
-          data-cursor="view"
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full h-full group/card"
         >
-          <img
-            ref={imageRef}
-            src={project.image}
-            alt={project.name}
-            className="w-full h-full object-cover origin-center scale-115"
-            loading="lazy"
-          />
-        </div>
+          <div
+            ref={imageWrapperRef}
+            className="w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-[20px] md:rounded-[28px] border border-white/5 relative"
+            style={{ clipPath: "inset(100% 0% 0% 0%)" }}
+            data-cursor="view"
+          >
+            <img
+              ref={imageRef}
+              src={project.image}
+              alt={project.name}
+              className="w-full h-full object-cover origin-center scale-115 transition-transform duration-700 ease-out group-hover/card:scale-105"
+              loading="lazy"
+            />
+          </div>
+        </a>
       </div>
     </div>
   );
