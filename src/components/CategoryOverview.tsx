@@ -68,23 +68,23 @@ export default function CategoryOverview() {
   };
 
   return (
-    <section className="py-24 md:py-40 bg-[#EA580C] text-[#0F0F10] border-y border-black/5" id="services-section">
+    <section className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5" id="services-section">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
-        <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between border-b border-black/10 pb-8">
+        <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-8">
           <div>
-            <span className="eyebrow text-[#0F0F10]/60 uppercase block mb-4">What We Do</span>
-            <h2 className="section-headline text-current uppercase">
+            <span className="eyebrow text-[#EA580C] uppercase block mb-4">What We Do</span>
+            <h2 className="section-headline text-white uppercase">
               Core Expertise
             </h2>
           </div>
-          <p className="body-default text-[#0F0F10]/90 max-w-sm mt-4 md:mt-0">
+          <p className="body-default text-[#A1A1AA] max-w-sm mt-4 md:mt-0">
             We focus on a selective set of capabilities to deliver work that actually moves the needle.
           </p>
         </div>
 
         {/* Categories List */}
-        <div className="border-t border-black/10">
+        <div className="border-t border-white/5">
           {CATEGORIES.map((cat) => {
             const isHovered = hoveredId === cat.id;
             const isExpanded = expandedId === cat.id;
@@ -95,19 +95,19 @@ export default function CategoryOverview() {
                 onMouseEnter={() => setHoveredId(cat.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => handleRowClick(cat.id)}
-                className={`relative border-b border-black/10 py-8 md:py-12 px-2 md:px-6 cursor-pointer transition-colors duration-500 hover:bg-black/5 group ${
-                  isExpanded ? "bg-black/5" : ""
+                className={`relative border-b border-white/5 py-8 md:py-12 px-2 md:px-6 cursor-pointer transition-colors duration-500 hover:bg-[#171717] group ${
+                  isExpanded ? "bg-[#171717]" : ""
                 }`}
                 data-cursor="view"
               >
                 {/* Row Main Line */}
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col md:flex-row md:items-baseline md:gap-8">
-                    <span className="font-display text-4xl md:text-6xl lg:text-7xl uppercase text-current group-hover:text-black transition-colors duration-300">
+                    <span className="font-display text-4xl md:text-6xl lg:text-7xl uppercase text-[#F5F5F5] group-hover:text-white transition-colors duration-300">
                       {cat.title}
                     </span>
                     {/* Project Count (Visible on hover on desktop, always visible on mobile/active) */}
-                    <span className={`caption text-[#0F0F10]/70 uppercase mt-1 md:mt-0 transition-opacity duration-300 ${
+                    <span className={`caption text-[#A1A1AA] uppercase mt-1 md:mt-0 transition-opacity duration-300 ${
                       isHovered || isExpanded ? "opacity-100" : "md:opacity-0"
                     }`}>
                       {cat.count}
@@ -115,8 +115,8 @@ export default function CategoryOverview() {
                   </div>
 
                   {/* Icon */}
-                  <div className={`text-[#0F0F10]/60 group-hover:text-black group-hover:rotate-45 transition-all duration-300 ${
-                    isExpanded ? "rotate-45 text-black" : ""
+                  <div className={`text-[#A1A1AA] group-hover:text-[#EA580C] group-hover:rotate-45 transition-all duration-300 ${
+                    isExpanded ? "rotate-45 text-[#EA580C]" : ""
                   }`}>
                     <ArrowUpRight size={36} className="w-8 h-8 md:w-10 md:h-10" />
                   </div>
@@ -130,13 +130,13 @@ export default function CategoryOverview() {
                   }`}
                 >
                   <div className="col-span-8 flex flex-col justify-center">
-                    <p className="body-default text-[#0F0F10]/90 max-w-xl">
+                    <p className="body-default text-[#A1A1AA] max-w-xl">
                       {cat.description}
                     </p>
                   </div>
                   
                   {/* Thumbnail Image sliding in */}
-                  <div className="col-span-4 flex justify-end relative h-32 overflow-hidden rounded-2xl border border-black/10">
+                  <div className="col-span-4 flex justify-end relative h-32 overflow-hidden rounded-2xl border border-white/10">
                     <img
                       src={cat.image}
                       alt={cat.title}
@@ -153,10 +153,10 @@ export default function CategoryOverview() {
                     isExpanded ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <p className="body-default text-[#0F0F10]/90 mb-4">
+                  <p className="body-default text-[#A1A1AA] mb-4">
                     {cat.description}
                   </p>
-                  <div className="h-48 w-full overflow-hidden rounded-xl border border-black/10">
+                  <div className="h-48 w-full overflow-hidden rounded-xl border border-white/5">
                     <img
                       src={cat.image}
                       alt={cat.title}

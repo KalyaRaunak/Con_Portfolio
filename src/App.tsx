@@ -125,11 +125,11 @@ function StatBlock({ target, suffix, label }: StatBlockProps) {
   }, [target]);
 
   return (
-    <div ref={ref} className="border-t border-current/10 pt-6">
-      <div className="font-display text-4xl md:text-5xl lg:text-6xl text-current">
+    <div ref={ref} className="border-t border-white/5 pt-6">
+      <div className="font-display text-4xl md:text-5xl lg:text-6xl text-white">
         {count}{suffix}
       </div>
-      <p className="caption text-current/70 mt-2 uppercase">{label}</p>
+      <p className="caption text-[#A1A1AA] mt-2 uppercase">{label}</p>
     </div>
   );
 }
@@ -318,7 +318,7 @@ export default function App() {
 
       {/* 2. About Converge Section */}
       <section
-        className="py-32 md:py-48 bg-[#EA580C] text-[#0F0F10] relative z-10"
+        className="py-32 md:py-48 bg-[#0F0F10] border-t border-white/5 relative z-10"
         id="about-section"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -326,15 +326,15 @@ export default function App() {
             
             {/* Left column large statement */}
             <div className="lg:col-span-6 flex flex-col justify-start">
-              <span className="eyebrow text-[#0F0F10]/60 uppercase block mb-6">About Us</span>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-current uppercase tracking-tight leading-[0.95] max-w-xl">
+              <span className="eyebrow text-[#EA580C] uppercase block mb-6">About Us</span>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#F5F5F5] uppercase tracking-tight leading-[0.95] max-w-xl">
                 We don't sell packages. We build the thing your competitors will screenshot.
               </h2>
             </div>
 
             {/* Right column supporting copy + stats grid */}
-            <div className="lg:col-span-6 lg:border-l lg:border-black/10 lg:pl-16 flex flex-col justify-between">
-              <p className="body-large text-[#0F0F10]/95 leading-relaxed max-w-xl mb-16">
+            <div className="lg:col-span-6 lg:border-l lg:border-white/5 lg:pl-16 flex flex-col justify-between">
+              <p className="body-large text-[#A1A1AA] leading-relaxed max-w-xl mb-16">
                 Converge started as a two-person team frustrated with agencies that shipped the same templated site to every client with a different logo pasted on top. We work differently: small enough to obsess over every pixel, senior enough to think past the pixel — into strategy, motion, and the systems that keep a brand consistent long after launch. Every project gets a point of view before it gets a Figma file.
               </p>
 
@@ -345,11 +345,11 @@ export default function App() {
                 <StatBlock target={100} suffix="%" label="Custom Design — Zero Templates" />
                 
                 {/* Static qualitative stat card */}
-                <div className="border-t border-current/10 pt-6">
-                  <div className="font-display text-4xl md:text-5xl lg:text-6xl text-current">
+                <div className="border-t border-white/5 pt-6">
+                  <div className="font-display text-4xl md:text-5xl lg:text-6xl text-white">
                     —
                   </div>
-                  <p className="caption text-current/70 mt-2 uppercase">Fast-Growing Studio</p>
+                  <p className="caption text-[#A1A1AA] mt-2 uppercase">Fast-Growing Studio</p>
                 </div>
               </div>
 
