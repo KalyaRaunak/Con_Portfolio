@@ -26,31 +26,24 @@ const CATEGORIES: CategoryItem[] = [
   },
   {
     id: 3,
-    title: "AI Creative",
+    title: "AI Creatives",
     count: "03 Projects",
     description: "Cutting-edge AI-assisted generation, art direction, and product photography visualization.",
     image: "/images/velunor_perfume.png"
   },
   {
     id: 4,
-    title: "Performance Marketing",
+    title: "Social Media Management",
     count: "05 Projects",
-    description: "Conversion-optimized landing pages, creative campaigns, and data-backed performance systems.",
+    description: "Organic growth campaigns, content creation, brand positioning, and social channel design.",
     image: "/images/ocean_blue.png"
   },
   {
     id: 5,
-    title: "Automation",
+    title: "AI & SaaS Products",
     count: "06 Projects",
-    description: "Tailored CRM integrations, headless CMS setups, and automatic content syndication flows.",
-    image: "/images/gayatri_stitching.png"
-  },
-  {
-    id: 6,
-    title: "UI/UX",
-    count: "07 Projects",
-    description: "In-depth user research, wireframing, high-fidelity layouts, and functional interactive prototypes.",
-    image: "/images/vns_hostel.png"
+    description: "End-to-end product strategy, frontend interfaces, SaaS dashboards, and AI application engineering.",
+    image: "/images/stheer_uk.png"
   }
 ];
 
