@@ -40,7 +40,7 @@ export default function Testimonial() {
   return (
     <section
       ref={sectionRef}
-      className="py-32 md:py-48 bg-[#0F0F10] border-t border-white/5 relative overflow-hidden flex items-center justify-center"
+      className="py-32 md:py-48 bg-[#EA580C] text-[#0F0F10] border-y border-black/5 relative overflow-hidden flex items-center justify-center"
     >
       {/* Oversized background quote mark, reminiscent of the hero glow */}
       <div 
@@ -50,7 +50,7 @@ export default function Testimonial() {
         }}
       >
         <span 
-          className="font-display text-[#EA580C] opacity-5 select-none leading-none"
+          className="font-display text-black opacity-5 select-none leading-none"
           style={{
             fontSize: "clamp(300px, 40vw, 600px)",
           }}
@@ -63,25 +63,25 @@ export default function Testimonial() {
         ref={contentRef}
         className="max-w-4xl mx-auto px-6 text-center relative z-10 flex flex-col items-center space-y-8"
       >
-        <span className="eyebrow text-[#EA580C] uppercase tracking-widest">
+        <span className="eyebrow text-[#0F0F10]/60 uppercase tracking-widest">
           Client Feedback
         </span>
 
         {/* Large premium typography quote */}
-        <blockquote className="body-large text-[#F5F5F5] font-light leading-relaxed tracking-wide max-w-3xl italic">
+        <blockquote className="body-large text-current font-light leading-relaxed tracking-wide max-w-3xl italic">
           "Converge didn't just build us a website; they designed a system that redefined how our audience interacts with our brand online. Their obsession with small details and smooth motion created an experience that our competitors are already trying to copy."
         </blockquote>
 
         {/* Author details */}
         <div className="flex items-center space-x-4 pt-4">
-          <div className="w-12 h-12 rounded-full border border-[#EA580C]/20 bg-[#171717] overflow-hidden flex items-center justify-center">
-            <span className="font-display text-[#EA580C] text-lg">VK</span>
+          <div className="w-12 h-12 rounded-full border border-black/15 bg-black/5 overflow-hidden flex items-center justify-center">
+            <span className="font-display text-black text-lg">VK</span>
           </div>
           <div className="text-left">
-            <cite className="not-italic font-display uppercase tracking-tight text-white block text-lg">
+            <cite className="not-italic font-display uppercase tracking-tight text-black block text-lg">
               Vikram Krishnan
             </cite>
-            <span className="caption text-[#A1A1AA] block text-xs mt-0.5">
+            <span className="caption text-[#0F0F10]/70 block text-xs mt-0.5">
               Founder, Nilgiri Co.
             </span>
           </div>

@@ -95,22 +95,22 @@ export default function FilterGrid() {
   }, [activeFilter]);
 
   return (
-    <section className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5" id="work-section">
+    <section className="py-24 md:py-40 bg-[#EA580C] text-[#0F0F10] border-y border-black/5" id="work-section">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Title */}
-        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-8">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between border-b border-black/10 pb-8">
           <div>
-            <span className="eyebrow text-[#EA580C] uppercase block mb-4">Portfolio</span>
-            <h2 className="section-headline text-white uppercase">All Work</h2>
+            <span className="eyebrow text-[#0F0F10]/60 uppercase block mb-4">Portfolio</span>
+            <h2 className="section-headline text-current uppercase">All Work</h2>
           </div>
-          <p className="body-default text-[#A1A1AA] max-w-sm mt-4 md:mt-0">
+          <p className="body-default text-[#0F0F10]/90 max-w-sm mt-4 md:mt-0">
             A curated showcase of projects where strategy, design, and code converge.
           </p>
         </div>
 
         {/* Filter Navigation */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-16 border-b border-white/5 pb-6">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-16 border-b border-black/10 pb-6">
           {FILTERS.map((filter) => {
             const isActive = activeFilter === filter;
             return (
@@ -118,12 +118,12 @@ export default function FilterGrid() {
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
                 className={`relative py-2 text-sm uppercase tracking-widest font-display transition-colors duration-300 ${
-                  isActive ? "text-[#EA580C]" : "text-[#A1A1AA] hover:text-white"
+                  isActive ? "text-black" : "text-[#0F0F10]/60 hover:text-black"
                 }`}
               >
                 {filter}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#EA580C] animate-width-reveal" />
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black animate-width-reveal" />
                 )}
               </button>
             );
@@ -138,7 +138,7 @@ export default function FilterGrid() {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative overflow-hidden rounded-[20px] md:rounded-[28px] border border-white/5 bg-[#171717] aspect-[4/3] cursor-pointer"
+              className="group relative overflow-hidden rounded-[20px] md:rounded-[28px] border border-black/10 bg-[#171717] aspect-[4/3] cursor-pointer"
               data-cursor="view"
             >
               {/* Image */}
