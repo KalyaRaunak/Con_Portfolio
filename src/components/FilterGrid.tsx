@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronDown } from "lucide-react";
 import { gsap } from "gsap";
 import { PROJECTS } from "../data/projects";
 import type { FilterProject } from "../data/projects";
@@ -7,6 +7,7 @@ import FilterProjectCard from "./FilterProjectCard";
 import LightboxModal from "./LightboxModal";
 
 const FILTERS = ["All", "Website", "Branding", "AI Creative", "Marketing", "Automation"];
+const INITIAL_PROJECT_LIMIT = 6;
 
 interface FilterGridProps {
   activeFilter?: string;
@@ -20,6 +21,7 @@ export default function FilterGrid({
   onGoBack
 }: FilterGridProps = {}) {
   const [internalFilter, setInternalFilter] = useState("All");
+  const [isExpanded, setIsExpanded] = useState(false);
   const [activeLightbox, setActiveLightbox] = useState<{
     project: FilterProject;
     slideIndex: number;
@@ -28,6 +30,7 @@ export default function FilterGrid({
   const currentFilter = externalFilter !== undefined ? externalFilter : internalFilter;
 
   const setActiveFilter = (filter: string) => {
+    setIsExpanded(false); // Reset expansion on filter switch
     if (onFilterChange) {
       onFilterChange(filter);
     } else {
@@ -70,6 +73,11 @@ export default function FilterGrid({
 
     return () => ctx.revert();
   }, [currentFilter]);
+
+  // Projects to display (either limited to INITIAL_PROJECT_LIMIT or all if expanded)
+  const displayedProjects = isExpanded
+    ? filteredProjects
+    : filteredProjects.slice(0, INITIAL_PROJECT_LIMIT);
 
   return (
     <section className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5 relative overflow-hidden" id="work-section">
@@ -127,7 +135,7 @@ export default function FilterGrid({
           ref={gridRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
-          {filteredProjects.map((project) => (
+          {displayedProjects.map((project) => (
             <FilterProjectCard
               key={project.id}
               project={project}
@@ -140,15 +148,29 @@ export default function FilterGrid({
           ))}
         </div>
 
-        {/* Bottom Go Back Button */}
-        {onGoBack && (
-          <div className="mt-16 flex justify-center">
+        {/* View All Projects / Show Less Button */}
+        {filteredProjects.length > INITIAL_PROJECT_LIMIT && (
+          <div className="mt-12 flex justify-center">
             <button
-              onClick={onGoBack}
-              className="inline-flex items-center space-x-3 font-display uppercase tracking-widest text-sm bg-white/5 hover:bg-[#EA580C] text-white px-8 py-4 rounded-full border border-white/10 transition-colors duration-300 shadow-md cursor-pointer"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="inline-flex items-center space-x-3 font-display uppercase tracking-widest text-xs md:text-sm bg-white/5 hover:bg-[#EA580C] text-white px-8 py-4 rounded-full border border-white/10 transition-colors duration-300 shadow-md cursor-pointer group"
               data-cursor="view"
             >
-              <ArrowLeft size={18} />
+              <span>{isExpanded ? "Show Fewer Projects" : `View All Projects (${filteredProjects.length})`}</span>
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? "rotate-180" : "group-hover:translate-y-0.5"}`} />
+            </button>
+          </div>
+        )}
+
+        {/* Bottom Go Back Button */}
+        {onGoBack && (
+          <div className="mt-12 flex justify-center">
+            <button
+              onClick={onGoBack}
+              className="inline-flex items-center space-x-3 font-display uppercase tracking-widest text-xs md:text-sm bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-full border border-white/10 transition-colors duration-300 shadow-md cursor-pointer"
+              data-cursor="view"
+            >
+              <ArrowLeft size={16} />
               <span>Back To Categories Overview</span>
             </button>
           </div>

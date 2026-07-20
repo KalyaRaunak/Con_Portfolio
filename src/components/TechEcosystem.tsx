@@ -22,11 +22,11 @@ export default function TechEcosystem() {
           </p>
         </div>
 
-        {/* Orbiting Circles Container */}
-        <div className="relative flex h-[500px] w-full max-w-xl items-center justify-center overflow-hidden rounded-lg bg-transparent">
+        {/* Orbiting Circles Container (Scaled responsively so outer 428px orbit fits all mobile screens without clipping) */}
+        <div className="relative flex h-[340px] sm:h-[440px] md:h-[500px] w-full max-w-xl items-center justify-center bg-transparent scale-[0.68] sm:scale-85 md:scale-100 transition-transform duration-300 origin-center my-2 select-none">
           {/* Central Logo Icon */}
           <div 
-            className="w-16 h-22 md:w-20 md:h-28 bg-white hover:bg-[#EA580C] transition-colors duration-300 z-10 cursor-pointer"
+            className="w-14 h-18 sm:w-16 sm:h-22 md:w-20 md:h-28 bg-white hover:bg-[#EA580C] transition-colors duration-300 z-10 cursor-pointer"
             style={{
               maskImage: "url(/images/logo.png)",
               WebkitMaskImage: "url(/images/logo.png)",
