@@ -60,6 +60,7 @@ const STEPS: Step[] = [
 
 export default function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -94,7 +95,10 @@ export default function Timeline() {
         return;
       }
 
-      // Desktop: Smooth Pinned Scroll Timeline
+      // Desktop: Smooth Pinned Scroll Timeline with Continuous Line
+      const progressBar = progressBarRef.current;
+      if (!progressBar) return;
+
       const pinTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -106,17 +110,24 @@ export default function Timeline() {
         }
       });
 
-      // Sequential step reveals (scrubbed step-by-step on scroll)
+      // 1. Fill continuous orange line across from left (Step 1) to right (Step 6)
+      pinTimeline.fromTo(
+        progressBar,
+        { scaleX: 0 },
+        { scaleX: 1, ease: "none", duration: 1.0 },
+        0
+      );
+
+      // 2. Sequential step reveals as the line reaches each step
       const steps = container.querySelectorAll(".timeline-step-desktop");
       steps.forEach((step, idx) => {
-        if (idx === 0) return; // Step 1 visible on start
+        if (idx === 0) return; // Step 1 is already visible
 
         const startTime = (idx - 1) / (steps.length - 1);
 
-        pinTimeline.fromTo(
+        pinTimeline.to(
           step,
-          { opacity: 0, y: 32 },
-          { opacity: 1, y: 0, ease: "power2.out", duration: 0.25 },
+          { opacity: 1, duration: 0.2 },
           startTime
         );
       });
@@ -135,17 +146,25 @@ export default function Timeline() {
           <h2 className="section-headline text-white uppercase">How We Work</h2>
         </div>
 
-        {/* 6-Column Steps Layout */}
+        {/* 6-Column Steps Layout with Continuous Horizontal Line */}
         <div className="relative w-full max-w-7xl mx-auto">
+          {/* Single Continuous Horizontal Line (Placed in gap between numbers & icons - NEVER intersects icons/text) */}
+          <div className="absolute top-[82px] left-0 right-0 h-[1px] bg-white/10 z-0">
+            <div
+              ref={progressBarRef}
+              className="h-full bg-[#EA580C] origin-left scale-x-0 w-full"
+            />
+          </div>
+
           <div className="grid grid-cols-6 gap-6 relative z-10">
             {STEPS.map((step, idx) => (
               <div
                 key={step.id}
-                className="timeline-step-desktop flex flex-col justify-start select-none text-left"
-                style={{ opacity: idx === 0 ? 1 : 0 }}
+                className="timeline-step-desktop flex flex-col justify-start select-none text-left transition-opacity duration-300"
+                style={{ opacity: idx === 0 ? 1 : 0.3 }}
               >
                 {/* Step number on top (Clean orange Anton font) */}
-                <div className="timeline-num-desktop font-display text-[#EA580C] text-7xl lg:text-8xl leading-none select-none mb-4">
+                <div className="timeline-num-desktop font-display text-[#EA580C] text-7xl lg:text-8xl leading-none select-none mb-6">
                   {step.num}
                 </div>
 
