@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { ArrowLeft, ChevronDown } from "lucide-react";
-import { gsap } from "gsap";
 import { PROJECTS } from "../data/projects";
 import type { FilterProject } from "../data/projects";
 import FilterProjectCard from "./FilterProjectCard";
@@ -38,43 +37,12 @@ export default function FilterGrid({
     }
   };
 
-  const [filteredProjects, setFilteredProjects] = useState<FilterProject[]>(PROJECTS);
-  const gridRef = useRef<HTMLDivElement>(null);
+  // Derive filtered projects directly for zero latency / no state desync
+  const filteredProjects = currentFilter === "All"
+    ? PROJECTS
+    : PROJECTS.filter((p) => p.category === currentFilter);
 
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    // Smooth transition between filters
-    const ctx = gsap.context(() => {
-      // Fade out current items
-      gsap.to(grid.children, {
-        opacity: 0,
-        scale: 0.95,
-        duration: 0.2,
-        ease: "power2.in",
-        onComplete: () => {
-          // Update items state
-          if (currentFilter === "All") {
-            setFilteredProjects(PROJECTS);
-          } else {
-            setFilteredProjects(PROJECTS.filter((p) => p.category === currentFilter));
-          }
-
-          // Fade back in updated list
-          gsap.fromTo(
-            grid.children,
-            { opacity: 0, scale: 0.95 },
-            { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out", stagger: 0.05 }
-          );
-        }
-      });
-    }, grid);
-
-    return () => ctx.revert();
-  }, [currentFilter]);
-
-  // Projects to display (either limited to INITIAL_PROJECT_LIMIT or all if expanded)
+  // Display top 6 projects unless user clicks 'View All Projects'
   const displayedProjects = isExpanded
     ? filteredProjects
     : filteredProjects.slice(0, INITIAL_PROJECT_LIMIT);
@@ -131,10 +99,7 @@ export default function FilterGrid({
         </div>
 
         {/* Work Grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {displayedProjects.map((project) => (
             <FilterProjectCard
               key={project.id}

@@ -2,13 +2,13 @@ import { OrbitingCircles } from "./ui/orbiting-circles";
 
 export default function TechEcosystem() {
   return (
-    <section className="py-24 md:py-32 bg-[#0F0F10] relative overflow-hidden border-t border-white/5">
+    <section className="py-16 md:py-32 bg-[#0F0F10] relative overflow-hidden border-t border-white/5">
       {/* Subtle background glow */}
       <div className="absolute glow-effect w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.03] pointer-events-none select-none z-0" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center">
         {/* Title Header */}
-        <div className="text-center space-y-4 max-w-2xl mb-16">
+        <div className="text-center space-y-4 max-w-2xl mb-8 md:mb-16">
           <div className="flex items-center justify-center space-x-2 animate-fade-in">
             <span className="h-[1px] w-8 bg-[#EA580C]/50" />
             <span className="eyebrow text-[#EA580C] uppercase tracking-widest text-[11px]">Trusted by Brands</span>
@@ -22,8 +22,8 @@ export default function TechEcosystem() {
           </p>
         </div>
 
-        {/* Orbiting Circles Container (Scaled responsively so outer 428px orbit fits all mobile screens without clipping) */}
-        <div className="relative flex h-[340px] sm:h-[440px] md:h-[500px] w-full max-w-xl items-center justify-center bg-transparent scale-[0.68] sm:scale-85 md:scale-100 transition-transform duration-300 origin-center my-2 select-none">
+        {/* Orbiting Circles Container (h-[440px] height & scale-[0.58] ensures 360-degree orbit never clips top/bottom/sides) */}
+        <div className="relative flex h-[440px] sm:h-[480px] md:h-[520px] w-full max-w-xl items-center justify-center bg-transparent scale-[0.58] xs:scale-[0.66] sm:scale-85 md:scale-100 transition-transform duration-300 origin-center my-0 select-none">
           {/* Central Logo Icon */}
           <div 
             className="w-14 h-18 sm:w-16 sm:h-22 md:w-20 md:h-28 bg-white hover:bg-[#EA580C] transition-colors duration-300 z-10 cursor-pointer"
