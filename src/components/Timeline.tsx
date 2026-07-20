@@ -94,29 +94,43 @@ export default function Timeline() {
         return;
       }
 
-      // Desktop: Pinned Scroll Timeline (Step 1 visible on load, steps 2-6 reveal sequentially on scroll)
+      // Desktop: Pinned Scroll Timeline (Step 1 strictly visible on load, steps 2-6 reveal 1-by-1 sequentially on scroll)
       const pinTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           pin: true,
-          scrub: 0.5,
+          scrub: 0.6,
           start: "top top",
-          end: "+=1200",
+          end: "+=1800", // Pinned scroll distance to give clear spacing between step reveals
           invalidateOnRefresh: true,
         }
       });
 
-      const steps = container.querySelectorAll(".timeline-step-desktop");
+      const steps = Array.from(container.querySelectorAll<HTMLElement>(".timeline-step-desktop"));
+
+      // Set initial states: Step 1 visible at start, Steps 2-6 hidden off-y
       steps.forEach((step, idx) => {
-        if (idx === 0) return; // Step 1 is visible on start
+        if (idx > 0) {
+          gsap.set(step, { opacity: 0, y: 32 });
+        } else {
+          gsap.set(step, { opacity: 1, y: 0 });
+        }
+      });
 
-        const startTime = (idx - 1) / (steps.length - 1);
+      // Animate steps 2 to 6 into view one after another as user scrolls down
+      steps.forEach((step, idx) => {
+        if (idx === 0) return; // Step 1 already visible
 
-        pinTimeline.fromTo(
+        // Distribute step reveals evenly across the scroll duration
+        pinTimeline.to(
           step,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, ease: "power2.out", duration: 0.2 },
-          startTime
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out"
+          },
+          (idx - 1) * 0.8
         );
       });
     }, container);
