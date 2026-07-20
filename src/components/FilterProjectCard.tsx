@@ -172,30 +172,24 @@ export default function FilterProjectCard({ project, onClick }: FilterProjectCar
         />
       )}
 
-      {/* Bottom Gradient overlay for legibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90 pointer-events-none" />
+      {/* Bottom Gradient overlay for legibility (z-20 to sit on top of video/image) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 group-hover:from-black/95 pointer-events-none z-20" />
 
-      {/* Top-left category badge */}
-      <div className="absolute top-6 left-6 pointer-events-none">
-        <span className="eyebrow bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-white text-[11px]">
+      {/* Top-left category badge (z-30 to stay in front) */}
+      <div className="absolute top-6 left-6 pointer-events-none z-30">
+        <span className="eyebrow bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-white text-[11px] shadow-lg">
           {project.category}
         </span>
       </div>
 
-      {/* Bottom Project Details */}
-      <div className="absolute bottom-6 left-6 right-6 flex flex-col md:translate-y-4 md:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out pointer-events-none">
-        <h4 className="font-display text-2xl uppercase text-[#F5F5F5] tracking-tight">
+      {/* Bottom Project Details (z-30 to guarantee typography is always in front of media) */}
+      <div className="absolute bottom-6 left-6 right-6 z-30 flex flex-col transform transition-all duration-300 ease-out pointer-events-none">
+        <h4 className="font-display text-2xl uppercase text-[#F5F5F5] group-hover:text-[#EA580C] tracking-tight drop-shadow-lg transition-colors duration-300">
           {project.title}
         </h4>
-        <span className="caption text-[#A1A1AA] mt-1">{project.service}</span>
-      </div>
-
-      {/* Mobile details (always visible at bottom on touch devices) */}
-      <div className="md:hidden absolute bottom-6 left-6 right-6 flex flex-col pointer-events-none">
-        <h4 className="font-display text-2xl uppercase text-[#F5F5F5] tracking-tight">
-          {project.title}
-        </h4>
-        <span className="caption text-[#A1A1AA] mt-1">{project.service}</span>
+        <span className="caption text-[#A1A1AA] mt-1 drop-shadow-md group-hover:text-white transition-colors duration-300">
+          {project.service}
+        </span>
       </div>
     </div>
   );
