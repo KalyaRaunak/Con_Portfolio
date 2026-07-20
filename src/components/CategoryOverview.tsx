@@ -158,17 +158,15 @@ export default function CategoryOverview({ onSelectCategory }: CategoryOverviewP
                         loop
                         muted
                         playsInline
-                        className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
-                          isHovered ? "scale-100 translate-x-0" : "scale-110 translate-x-12"
-                        }`}
+                        className={`h-full w-full object-cover transition-transform duration-700 ease-out ${isHovered ? "scale-100 translate-x-0" : "scale-110 translate-x-12"
+                          }`}
                       />
                     ) : (
                       <img
                         src={cat.image}
                         alt={cat.title}
-                        className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
-                          isHovered ? "scale-100 translate-x-0" : "scale-110 translate-x-12"
-                        }`}
+                        className={`h-full w-full object-cover transition-transform duration-700 ease-out ${isHovered ? "scale-100 translate-x-0" : "scale-110 translate-x-12"
+                          }`}
                       />
                     )}
                   </div>
@@ -176,9 +174,8 @@ export default function CategoryOverview({ onSelectCategory }: CategoryOverviewP
 
                 {/* Mobile: Accordion Expand */}
                 <div
-                  className={`md:hidden transition-all duration-500 ease-in-out overflow-hidden ${
-                    isExpanded ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
-                  }`}
+                  className={`md:hidden transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
+                    }`}
                 >
                   <p className="body-default text-[#A1A1AA] mb-4">
                     {cat.description}

@@ -42,15 +42,14 @@ function ClientFeedback() {
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:50px_56px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
               <article className="mt-auto relative z-10">
                 <p className="text-[#A1A1AA]">
-                  "Hypersphere has been a game-changer for us. Their service is
-                  top-notch and their team is incredibly responsive."
+                  "Working with Converge Digitals was an outstanding experience. They understood the essence of our brand and transformed it into a modern, visually engaging website that truly reflects our legacy. Their creativity, attention to detail, and professionalism made the entire process seamless. We're delighted with the final outcome."
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
                     <h2 className=" font-semibold lg:text-xl text-sm text-[#F5F5F5]">
-                      Guillermo Rauch
+                      Ruchit Samdani
                     </h2>
-                    <p className="text-[#A1A1AA] text-xs">CEO of Enigma</p>
+                    <p className="text-[#A1A1AA] text-xs">Managing Director of Mahesh Masala Gruh Udhyog</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=687&auto=format&fit=crop"
@@ -65,13 +64,12 @@ function ClientFeedback() {
             <TimelineContent animationNum={1} customVariants={revealVariants} timelineRef={testimonialRef} className="lg:flex-[3] flex-[4] lg:h-fit lg:shrink-0 flex flex-col justify-between relative bg-[#EA580C] text-black overflow-hidden rounded-lg border border-[#EA580C]/20 p-5">
               <article className="mt-auto">
                 <p className="font-medium">
-                  "We've seen incredible results with Hypersphere. Their
-                  expertise, dedication."
+                  "Working alongside Converge Digitals has been effortless. Their creative thinking, reliable execution, and commitment to delivering exceptional results make them a valued partner on every project we undertake together."
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
-                    <h2 className=" font-semibold text-xl text-black">Rika Shinoda</h2>
-                    <p className="text-black/70 text-sm">CEO of Kintsugi</p>
+                    <h2 className=" font-semibold text-xl text-black">Yash Solanki</h2>
+                    <p className="text-black/70 text-sm">Founder of Stheer</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1512485694743-9c9538b4e6e0?q=80&w=687&auto=format&fit=crop"
@@ -88,15 +86,14 @@ function ClientFeedback() {
             <TimelineContent animationNum={2} customVariants={revealVariants} timelineRef={testimonialRef} className="flex flex-col justify-between relative bg-[#171717] text-white overflow-hidden rounded-lg border border-white/5 p-5">
               <article className="mt-auto">
                 <p className="2xl:text-base text-sm text-[#A1A1AA]">
-                  "Their team is highly professional, and their innovative
-                  solutions have truly transformed the way we operate."
+                  "Converge Digitals did an incredible job bringing our vision to life through a cinematic brand reel. Their creativity, storytelling, and attention to detail resulted in content that truly captures our brand's identity. The entire process was smooth, professional, and exceeded our expectations."
                 </p>
                 <div className="flex justify-between items-end pt-5">
                   <div>
                     <h2 className=" font-semibold lg:text-xl text-lg text-[#F5F5F5]">
-                      Reacher{" "}
+                      Ritika Singh{" "}
                     </h2>
-                    <p className="text-[#A1A1AA] text-sm">CEO of OdeaoLabs</p>
+                    <p className="text-[#A1A1AA] text-sm">Owner of Velunor</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=1021&auto=format&fit=crop"
@@ -111,13 +108,12 @@ function ClientFeedback() {
             <TimelineContent animationNum={3} customVariants={revealVariants} timelineRef={testimonialRef} className="flex flex-col justify-between relative bg-[#171717] text-white overflow-hidden rounded-lg border border-white/5 p-5">
               <article className="mt-auto">
                 <p className="2xl:text-base text-sm text-[#A1A1AA]">
-                  "We're extremely satisfied with Hypersphere. Their expertise
-                  and dedication have exceeded our expectations."
+                  "The website is elegant, fast, and thoughtfully crafted, helping us showcase our story and products with confidence. It was a pleasure working with a team that genuinely cares about quality."
                 </p>
                 <div className="flex justify-between items-end pt-5">
                   <div>
-                    <h2 className=" font-semibold lg:text-xl text-lg text-[#F5F5F5]">John </h2>
-                    <p className="text-[#A1A1AA] text-sm">CEO of Labsbo</p>
+                    <h2 className=" font-semibold lg:text-xl text-lg text-[#F5F5F5]">Nilgiri</h2>
+                    <p className="text-[#A1A1AA] text-sm">Founder of Nilgiri & Co.</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1615109398623-88346a601842?q=80&w=687&auto=format&fit=crop"
@@ -132,15 +128,14 @@ function ClientFeedback() {
             <TimelineContent animationNum={4} customVariants={revealVariants} timelineRef={testimonialRef} className="flex flex-col justify-between relative bg-[#171717] text-white overflow-hidden rounded-lg border border-white/5 p-5">
               <article className="mt-auto">
                 <p className="2xl:text-base text-sm text-[#A1A1AA]">
-                  "Their customer support is absolutely exceptional. They are
-                  always available, incredibly helpful."
+                  "Converge Digitals built an e-commerce website that not only looks premium but also delivers a seamless shopping experience. From intuitive navigation to responsive design and smooth performance, every detail was thoughtfully executed. Their professionalism, technical expertise, and commitment to quality made the entire project a success."
                 </p>
                 <div className="flex justify-between items-end pt-5">
                   <div>
                     <h2 className=" font-semibold lg:text-xl text-lg text-[#F5F5F5]">
-                      Steven Sunny
+                      Gopal Choudhary
                     </h2>
-                    <p className="text-[#A1A1AA] text-sm">CEO of boxefi</p>
+                    <p className="text-[#A1A1AA] text-sm">Founder of Enki</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1740102074295-c13fae3e4f8a?q=80&w=687&auto=format&fit=crop"
@@ -157,12 +152,12 @@ function ClientFeedback() {
             <TimelineContent animationNum={5} customVariants={revealVariants} timelineRef={testimonialRef} className=" lg:flex-[3] flex-[4] flex flex-col justify-between relative bg-[#EA580C] text-black overflow-hidden rounded-lg border border-[#EA580C]/20 p-5">
               <article className="mt-auto">
                 <p className="font-medium">
-                  "Hypersphere has been a key partner in our growth journey."
+                  "Converge Digitals perfectly translated our vision into a modern, high-performing website that reflects the quality of our institution. Their design expertise, responsiveness, and attention to detail made the entire process effortless. The final result has strengthened our online presence and beautifully represents our brand."
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
-                    <h2 className=" font-semibold text-xl text-black">Guillermo Rauch</h2>
-                    <p className="text-black/70 text-sm">CEO of OdeaoLabs</p>
+                    <h2 className=" font-semibold text-xl text-black">Neeraj Rajput</h2>
+                    <p className="text-black/70 text-sm">Managing Director of Ocean Blue Education</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1563237023-b1e970526dcb?q=80&w=765&auto=format&fit=crop"
@@ -178,15 +173,12 @@ function ClientFeedback() {
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:50px_56px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
               <article className="mt-auto relative z-10">
                 <p className="text-[#A1A1AA]">
-                  "Hypersphere has been a true game-changer for us. Their
-                  exceptional service, combined with their deep expertise and
-                  commitment to excellence, has made a significant impact on our
-                  business."
+                  "Converge Digitals delivered a logo that perfectly captured our brand identity. Their creative approach, attention to detail, and understanding of our vision resulted in a design that feels modern, memorable, and professional. The entire process was smooth, collaborative, and exceeded our expectations. We’re extremely happy with the final outcome."
                 </p>
                 <div className="flex justify-between pt-5">
                   <div>
-                    <h2 className=" font-semibold text-xl text-[#F5F5F5]">Paul Brauch</h2>
-                    <p className="text-[#A1A1AA] text-sm">CTO of Spectrum</p>
+                    <h2 className=" font-semibold text-xl text-[#F5F5F5]">Kailashchandra Kalya</h2>
+                    <p className="text-[#A1A1AA] text-sm">CEO of Kunj Infrastructure</p>
                   </div>
                   <img
                     src="https://images.unsplash.com/photo-1590086782957-93c06ef21604?q=80&w=687&auto=format&fit=crop"

@@ -31,19 +31,23 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #0F0F10;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #EA580C;
 }
 
 /* Lenis smooth scrolling integration */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -105,6 +109,7 @@ html.lenis, html.lenis body {
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -163,6 +168,7 @@ html.lenis, html.lenis body {
     scroll-behavior: auto !important;
     transform: none !important;
   }
+
   .custom-cursor {
     display: none !important;
   }
@@ -173,6 +179,7 @@ html.lenis, html.lenis body {
   0% {
     transform: rotate(0deg) translateY(calc(var(--radius) * -1px)) rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg) translateY(calc(var(--radius) * -1px)) rotate(-360deg);
   }
@@ -215,8 +222,8 @@ html.lenis, html.lenis body {
   background-color: #4a4a4a;
   border: 3px solid #e0e0e0;
   border-radius: 9999px;
-  box-shadow: 
-    inset 0 3px 6px rgba(0, 0, 0, 0.6), 
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.6),
     0 2px 4px rgba(0, 0, 0, 0.4);
   z-index: 1;
   overflow: hidden;
@@ -225,7 +232,7 @@ html.lenis, html.lenis body {
 .toggle-base-inside {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 100%);
 }
 
 .toggle-handle-wrapper {
@@ -249,7 +256,7 @@ html.lenis, html.lenis body {
 }
 
 /* Move and rotate lever to the right when checked */
-.toggle-input:checked ~ .toggle-handle-wrapper .toggle-handle {
+.toggle-input:checked~.toggle-handle-wrapper .toggle-handle {
   transform: translateX(10px) rotate(22deg);
 }
 
@@ -263,8 +270,8 @@ html.lenis, html.lenis body {
   height: 26px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #ff6666 0%, #d61c1c 45%, #990000 80%, #660000 100%);
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.4), 
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.4),
     inset 0 -2px 5px rgba(0, 0, 0, 0.3),
     inset 0 2px 5px rgba(255, 255, 255, 0.5);
   z-index: 4;
@@ -287,6 +294,6 @@ html.lenis, html.lenis body {
   height: 100%;
   background: linear-gradient(90deg, #aeaeae 0%, #f3f3f3 30%, #9e9e9e 70%, #5c5c5c 100%);
   border-radius: 2px;
-  box-shadow: inset 1px 0 2px rgba(255,255,255,0.4), 1px 2px 3px rgba(0,0,0,0.3);
+  box-shadow: inset 1px 0 2px rgba(255, 255, 255, 0.4), 1px 2px 3px rgba(0, 0, 0, 0.3);
   z-index: 3;
 }

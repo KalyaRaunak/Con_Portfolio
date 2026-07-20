@@ -179,7 +179,7 @@ export default function App() {
           id="hero-glow"
           className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10"
         >
-          <span 
+          <span
             className="font-display text-[#EA580C] opacity-10 blur-[40px] md:blur-[60px] select-none leading-none tracking-tighter uppercase inline-block"
             style={{
               fontSize: "clamp(120px, 24vw, 440px)",
@@ -192,17 +192,17 @@ export default function App() {
         {/* Bottom overlay grid for subcopy and CTAs */}
         <div className="max-w-7xl mx-auto w-full relative z-20 grid grid-cols-12 gap-6">
           <div className="col-span-12 lg:col-span-8 flex flex-col items-start space-y-6">
-            
+
             {/* Tagline / Eyebrow */}
             <span className="eyebrow text-[#EA580C] uppercase tracking-widest hero-fade-up">
-              Creative Agency
+              Digital Company
             </span>
 
             <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12 mt-2 w-full hero-fade-up">
               <p className="body-large text-white/90 flex-1 leading-relaxed font-light max-w-xl">
                 We craft unforgettable digital platforms, branding systems, and custom automation for labels that refuse to look ordinary.
               </p>
-              
+
               <div className="flex flex-row items-center gap-6 mt-4 md:mt-0">
                 <MagneticButton>
                   <a
@@ -251,7 +251,7 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
-            
+
             {/* Left column large statement */}
             <div className="lg:col-span-6 flex flex-col justify-between">
               <div>
@@ -266,7 +266,7 @@ export default function App() {
             {/* Right column supporting copy + stats grid */}
             <div className="lg:col-span-6 lg:border-l lg:border-white/5 lg:pl-16 flex flex-col justify-between">
               <p id="about-paragraph-text" className="body-large leading-relaxed max-w-xl mb-16 select-none">
-                {"Converge started as a two-person team frustrated with agencies that shipped the same templated site to every client with a different logo pasted on top. We work differently: small enough to obsess over every pixel, senior enough to think past the pixel — into strategy, motion, and the systems that keep a brand consistent long after launch. Every project gets a point of view before it gets a Figma file."
+                {"Converge was built to challenge the ordinary. In a world of recycled templates and generic solutions, we create brands, websites, and digital experiences that are thoughtfully designed from the ground up. We combine strategy, design, technology, and storytelling to build products that not only look exceptional but also deliver measurable business impact. Every project starts with understanding your vision—because great design begins with great thinking."
                   .split(" ")
                   .map((word, idx) => (
                     <span
@@ -285,7 +285,7 @@ export default function App() {
                 <StatBlock target={15} suffix="+" label="Projects Shipped" />
                 <StatBlock target={5} suffix="+" label="Industries Served" />
                 <StatBlock target={100} suffix="%" label="Custom Design — Zero Templates" />
-                
+
                 {/* Static qualitative stat card */}
                 <div className="border-t border-white/5 pt-6">
                   <div className="font-display text-4xl md:text-5xl lg:text-6xl text-white">
@@ -310,7 +310,7 @@ export default function App() {
       {/* 5. Featured Projects */}
       <section className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          
+
           {/* Header */}
           <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-8">
             <div>
