@@ -60,7 +60,6 @@ const STEPS: Step[] = [
 
 export default function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -95,46 +94,30 @@ export default function Timeline() {
         return;
       }
 
-      // Desktop: Smooth Pinned Scroll Timeline with Continuous Line
-      const progressBar = progressBarRef.current;
-      if (!progressBar) return;
-
+      // Desktop: Pinned Scroll Timeline (Step 1 visible on load, steps 2-6 reveal sequentially on scroll)
       const pinTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           pin: true,
-          scrub: 0.6,
+          scrub: 0.5,
           start: "top top",
           end: "+=1200",
           invalidateOnRefresh: true,
         }
       });
 
-      // 1. Fill continuous orange line across from left (Step 1) to right (Step 6)
-      pinTimeline.fromTo(
-        progressBar,
-        { scaleX: 0 },
-        { scaleX: 1, ease: "none", duration: 1.0 },
-        0
-      );
+      const steps = container.querySelectorAll(".timeline-step-desktop");
+      steps.forEach((step, idx) => {
+        if (idx === 0) return; // Step 1 is visible on start
 
-      // 2. Sequential step reveals as the line reaches each step
-      const stepNums = container.querySelectorAll(".timeline-num-desktop");
-      const stepContents = container.querySelectorAll(".timeline-step-content-desktop");
+        const startTime = (idx - 1) / (steps.length - 1);
 
-      STEPS.forEach((_, idx) => {
-        if (idx === 0) return; // Step 1 is already visible
-
-        const startTime = (idx - 1) / (STEPS.length - 1);
-        const num = stepNums[idx];
-        const content = stepContents[idx];
-
-        if (num) {
-          pinTimeline.to(num, { opacity: 1, duration: 0.2 }, startTime);
-        }
-        if (content) {
-          pinTimeline.to(content, { opacity: 1, duration: 0.2 }, startTime);
-        }
+        pinTimeline.fromTo(
+          step,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, ease: "power2.out", duration: 0.2 },
+          startTime
+        );
       });
     }, container);
 
@@ -151,37 +134,20 @@ export default function Timeline() {
           <h2 className="section-headline text-white uppercase">How We Work</h2>
         </div>
 
-        {/* 6-Column Steps Layout with Continuous Horizontal Line */}
-        <div className="relative w-full max-w-7xl mx-auto flex flex-col">
-          {/* Row 1: Step Numbers */}
-          <div className="grid grid-cols-6 gap-6 relative z-10 mb-4">
+        {/* 6-Column Steps Layout */}
+        <div className="relative w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-6 gap-6 relative z-10">
             {STEPS.map((step, idx) => (
               <div
                 key={step.id}
-                className="timeline-num-desktop font-display text-[#EA580C] text-7xl lg:text-8xl leading-none select-none transition-opacity duration-300"
-                style={{ opacity: idx === 0 ? 1 : 0.3 }}
+                className="timeline-step-desktop flex flex-col justify-start select-none text-left transition-all duration-300"
+                style={{ opacity: idx === 0 ? 1 : 0 }}
               >
-                {step.num}
-              </div>
-            ))}
-          </div>
+                {/* Step number on top (Clean orange Anton font) */}
+                <div className="timeline-num-desktop font-display text-[#EA580C] text-7xl lg:text-8xl leading-none select-none mb-6">
+                  {step.num}
+                </div>
 
-          {/* Row 2: Single Continuous Horizontal Line (Placed cleanly between numbers and icons) */}
-          <div className="relative w-full h-[2px] bg-white/10 my-4 z-0">
-            <div
-              ref={progressBarRef}
-              className="h-full bg-[#EA580C] origin-left scale-x-0 w-full"
-            />
-          </div>
-
-          {/* Row 3: Icons, Titles & Descriptions */}
-          <div className="grid grid-cols-6 gap-6 relative z-10 mt-4">
-            {STEPS.map((step, idx) => (
-              <div
-                key={step.id}
-                className="timeline-step-content-desktop flex flex-col justify-start select-none text-left transition-opacity duration-300"
-                style={{ opacity: idx === 0 ? 1 : 0.3 }}
-              >
                 {/* Icon beside Title */}
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="timeline-icon-container p-2.5 bg-[#171717] rounded-xl border border-white/10 flex items-center justify-center flex-shrink-0">
