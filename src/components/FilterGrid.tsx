@@ -57,19 +57,7 @@ export default function FilterGrid({
         {/* Title */}
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-8">
           <div>
-            <div className="flex items-center gap-4 mb-4">
-              <span className="eyebrow text-[#EA580C] uppercase block">Portfolio</span>
-              {onGoBack && (
-                <button
-                  onClick={onGoBack}
-                  className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-display text-[#EA580C] hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 cursor-pointer"
-                  data-cursor="view"
-                >
-                  <ArrowLeft size={14} />
-                  <span>Go Back To Categories</span>
-                </button>
-              )}
-            </div>
+            <span className="eyebrow text-[#EA580C] uppercase block mb-4">Portfolio</span>
             <h2 className="section-headline text-white uppercase">All Work</h2>
           </div>
           <p className="body-default text-[#A1A1AA] max-w-sm mt-4 md:mt-0">
