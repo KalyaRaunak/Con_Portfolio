@@ -119,17 +119,22 @@ export default function Timeline() {
       );
 
       // 2. Sequential step reveals as the line reaches each step
-      const steps = container.querySelectorAll(".timeline-step-desktop");
-      steps.forEach((step, idx) => {
+      const stepNums = container.querySelectorAll(".timeline-num-desktop");
+      const stepContents = container.querySelectorAll(".timeline-step-content-desktop");
+
+      STEPS.forEach((_, idx) => {
         if (idx === 0) return; // Step 1 is already visible
 
-        const startTime = (idx - 1) / (steps.length - 1);
+        const startTime = (idx - 1) / (STEPS.length - 1);
+        const num = stepNums[idx];
+        const content = stepContents[idx];
 
-        pinTimeline.to(
-          step,
-          { opacity: 1, duration: 0.2 },
-          startTime
-        );
+        if (num) {
+          pinTimeline.to(num, { opacity: 1, duration: 0.2 }, startTime);
+        }
+        if (content) {
+          pinTimeline.to(content, { opacity: 1, duration: 0.2 }, startTime);
+        }
       });
     }, container);
 
@@ -147,27 +152,36 @@ export default function Timeline() {
         </div>
 
         {/* 6-Column Steps Layout with Continuous Horizontal Line */}
-        <div className="relative w-full max-w-7xl mx-auto">
-          {/* Single Continuous Horizontal Line (Placed in gap between numbers & icons - NEVER intersects icons/text) */}
-          <div className="absolute top-[82px] left-0 right-0 h-[1px] bg-white/10 z-0">
+        <div className="relative w-full max-w-7xl mx-auto flex flex-col">
+          {/* Row 1: Step Numbers */}
+          <div className="grid grid-cols-6 gap-6 relative z-10 mb-4">
+            {STEPS.map((step, idx) => (
+              <div
+                key={step.id}
+                className="timeline-num-desktop font-display text-[#EA580C] text-7xl lg:text-8xl leading-none select-none transition-opacity duration-300"
+                style={{ opacity: idx === 0 ? 1 : 0.3 }}
+              >
+                {step.num}
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2: Single Continuous Horizontal Line (Placed cleanly between numbers and icons) */}
+          <div className="relative w-full h-[2px] bg-white/10 my-4 z-0">
             <div
               ref={progressBarRef}
               className="h-full bg-[#EA580C] origin-left scale-x-0 w-full"
             />
           </div>
 
-          <div className="grid grid-cols-6 gap-6 relative z-10">
+          {/* Row 3: Icons, Titles & Descriptions */}
+          <div className="grid grid-cols-6 gap-6 relative z-10 mt-4">
             {STEPS.map((step, idx) => (
               <div
                 key={step.id}
-                className="timeline-step-desktop flex flex-col justify-start select-none text-left transition-opacity duration-300"
+                className="timeline-step-content-desktop flex flex-col justify-start select-none text-left transition-opacity duration-300"
                 style={{ opacity: idx === 0 ? 1 : 0.3 }}
               >
-                {/* Step number on top (Clean orange Anton font) */}
-                <div className="timeline-num-desktop font-display text-[#EA580C] text-7xl lg:text-8xl leading-none select-none mb-6">
-                  {step.num}
-                </div>
-
                 {/* Icon beside Title */}
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="timeline-icon-container p-2.5 bg-[#171717] rounded-xl border border-white/10 flex items-center justify-center flex-shrink-0">
