@@ -60,8 +60,6 @@ const STEPS: Step[] = [
 
 export default function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
-  const mobileProgressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -77,127 +75,50 @@ export default function Timeline() {
         // Mobile vertical scroll reveal
         const mobileSteps = container.querySelectorAll(".timeline-step-mobile");
         mobileSteps.forEach((step) => {
-          const number = step.querySelector(".timeline-number-mobile");
-
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: step,
-              start: "top 85%",
-              end: "top 55%",
-              scrub: true,
-            }
-          })
-          .fromTo(step,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, ease: "power1.out" }, 0)
-          .fromTo(number,
-            { color: "rgba(255, 255, 255, 0.2)" },
-            { color: "#EA580C", ease: "power1.out" }, 0);
-        });
-
-        const mobileProgressBar = mobileProgressBarRef.current;
-        if (mobileProgressBar) {
           gsap.fromTo(
-            mobileProgressBar,
-            { scaleY: 0 },
+            step,
+            { opacity: 0, y: 30 },
             {
-              scaleY: 1,
-              ease: "none",
+              opacity: 1,
+              y: 0,
+              ease: "power2.out",
               scrollTrigger: {
-                trigger: mobileProgressBar.parentElement,
-                start: "top 75%",
-                end: "bottom 75%",
+                trigger: step,
+                start: "top 85%",
+                end: "top 55%",
                 scrub: true,
               }
             }
           );
-        }
+        });
         return;
       }
 
       // Desktop: Smooth Pinned Scroll Timeline
-      const progressBar = progressBarRef.current;
-      if (!progressBar) return;
-
       const pinTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           pin: true,
-          scrub: 0.8,
+          scrub: 0.6,
           start: "top top",
-          end: "+=1000",
+          end: "+=1200",
           invalidateOnRefresh: true,
         }
       });
 
-      // 1. Draw solid orange connector line across from left to right
-      pinTimeline.fromTo(
-        progressBar,
-        { scaleX: 0 },
-        { scaleX: 1, ease: "none", duration: 1.0 },
-        0
-      );
-
-      // 2. Sequential step highlights
+      // Sequential step reveals (scrubbed step-by-step on scroll)
       const steps = container.querySelectorAll(".timeline-step-desktop");
       steps.forEach((step, idx) => {
-        const stepNum = step.querySelector(".timeline-num-desktop");
-        const iconContainer = step.querySelector(".timeline-icon-container");
-        const stepTitle = step.querySelector(".timeline-title-desktop");
-        const stepDesc = step.querySelector(".timeline-desc-desktop");
+        if (idx === 0) return; // Step 1 visible on start
 
-        const startTime = idx / (steps.length - 1);
+        const startTime = (idx - 1) / (steps.length - 1);
 
-        if (idx > 0) {
-          pinTimeline.fromTo(
-            step,
-            { opacity: 0.25, y: 16 },
-            { opacity: 1, y: 0, ease: "power2.out", duration: 0.2 },
-            startTime
-          );
-        } else {
-          pinTimeline.to(
-            step,
-            { opacity: 1, y: 0, duration: 0.1 },
-            0
-          );
-        }
-
-        if (iconContainer) {
-          pinTimeline.fromTo(
-            iconContainer,
-            { borderColor: "rgba(255, 255, 255, 0.08)", backgroundColor: "#171717" },
-            { borderColor: "#EA580C", backgroundColor: "rgba(234, 88, 12, 0.1)", duration: 0.15 },
-            startTime
-          );
-        }
-
-        if (stepNum) {
-          pinTimeline.fromTo(
-            stepNum,
-            { color: "rgba(255, 255, 255, 0.2)" },
-            { color: "#EA580C", duration: 0.15 },
-            startTime
-          );
-        }
-
-        if (stepTitle) {
-          pinTimeline.fromTo(
-            stepTitle,
-            { color: "#A1A1AA" },
-            { color: "#F5F5F5", duration: 0.15 },
-            startTime
-          );
-        }
-
-        if (stepDesc) {
-          pinTimeline.fromTo(
-            stepDesc,
-            { opacity: 0.6 },
-            { opacity: 1, duration: 0.15 },
-            startTime
-          );
-        }
+        pinTimeline.fromTo(
+          step,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, ease: "power2.out", duration: 0.25 },
+          startTime
+        );
       });
     }, container);
 
@@ -205,49 +126,41 @@ export default function Timeline() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative bg-[#0F0F10] border-t border-white/5 py-24 md:py-32" id="process-section">
+    <div ref={containerRef} className="relative bg-[#0F0F10] border-t border-white/5" id="process-section">
       {/* Desktop View Container */}
-      <div className="hidden lg:flex flex-col justify-center max-w-7xl mx-auto px-12 md:px-16 w-full select-none">
-        {/* Intro Header */}
-        <div className="w-full mb-16 border-b border-white/5 pb-8">
-          <span className="eyebrow text-[#EA580C] uppercase block mb-3">Our Process</span>
+      <div className="hidden lg:flex flex-col justify-end pb-24 md:pb-32 h-screen relative overflow-hidden px-12 md:px-16">
+        {/* Intro Header (Top-Left aligned matching reference image) */}
+        <div className="absolute top-16 left-12 md:left-16 max-w-lg z-10 select-none">
+          <span className="eyebrow text-[#EA580C] uppercase block mb-2">Our Process</span>
           <h2 className="section-headline text-white uppercase">How We Work</h2>
         </div>
 
         {/* 6-Column Steps Layout */}
-        <div className="relative w-full">
-          <div className="grid grid-cols-6 gap-6 relative">
+        <div className="relative w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-6 gap-6 relative z-10">
             {STEPS.map((step, idx) => (
               <div
                 key={step.id}
-                className="timeline-step-desktop flex flex-col justify-start text-left transition-opacity duration-300"
-                style={{ opacity: idx === 0 ? 1 : 0.25 }}
+                className="timeline-step-desktop flex flex-col justify-start select-none text-left"
+                style={{ opacity: idx === 0 ? 1 : 0 }}
               >
-                {/* Step number on top */}
-                <div className="timeline-num-desktop font-display text-white/20 text-6xl lg:text-7xl leading-none select-none transition-colors duration-300 mb-6">
+                {/* Step number on top (Clean orange Anton font) */}
+                <div className="timeline-num-desktop font-display text-[#EA580C] text-7xl lg:text-8xl leading-none select-none mb-4">
                   {step.num}
-                </div>
-
-                {/* Sleek 1px Hairline Connector Bar (Between number and icon/title row - NO intersection with icon or text) */}
-                <div className="relative w-full h-[1px] bg-white/10 mb-6">
-                  <div
-                    ref={idx === 0 ? progressBarRef : null}
-                    className="absolute inset-0 bg-[#EA580C] origin-left scale-x-0 h-full w-full"
-                  />
                 </div>
 
                 {/* Icon beside Title */}
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="timeline-icon-container p-2.5 bg-[#171717] rounded-xl border border-white/10 flex items-center justify-center transition-all duration-300 flex-shrink-0">
+                  <div className="timeline-icon-container p-2.5 bg-[#171717] rounded-xl border border-white/10 flex items-center justify-center flex-shrink-0">
                     {step.icon}
                   </div>
-                  <h3 className="timeline-title-desktop font-display text-lg lg:text-xl text-[#A1A1AA] uppercase tracking-tight leading-none transition-colors duration-300">
+                  <h3 className="timeline-title-desktop font-display text-xl lg:text-2xl text-[#F5F5F5] uppercase tracking-tight leading-none">
                     {step.title}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="timeline-desc-desktop body-default text-[#A1A1AA] text-xs lg:text-sm leading-relaxed opacity-60 transition-opacity duration-300">
+                <p className="timeline-desc-desktop body-default text-[#A1A1AA] text-xs lg:text-sm leading-relaxed">
                   {step.desc}
                 </p>
               </div>
@@ -257,30 +170,20 @@ export default function Timeline() {
       </div>
 
       {/* Mobile Vertical View */}
-      <div className="lg:hidden px-6 max-w-xl mx-auto">
+      <div className="lg:hidden py-24 px-6 max-w-xl mx-auto">
         <div className="mb-16 border-b border-white/5 pb-8">
           <span className="eyebrow text-[#EA580C] uppercase block mb-4">Our Process</span>
           <h2 className="section-headline text-white uppercase">How We Work</h2>
         </div>
 
-        <div className="relative pl-8 space-y-16">
-          {/* Vertical progress line background */}
-          <div className="absolute left-[15px] top-2 bottom-2 w-[1px] bg-white/10 z-0" />
-          
-          {/* Active vertical progress line */}
-          <div 
-            ref={mobileProgressBarRef}
-            className="absolute left-[15px] top-2 w-[1px] bg-[#EA580C] origin-top scale-y-0 z-10"
-            style={{ height: "calc(100% - 16px)" }}
-          />
-
+        <div className="space-y-12">
           {STEPS.map((step) => (
-            <div key={step.id} className="timeline-step-mobile relative flex flex-col items-start text-left">
-              <div className="font-display text-5xl text-white/30 leading-none select-none timeline-number-mobile">
+            <div key={step.id} className="timeline-step-mobile flex flex-col items-start text-left">
+              <div className="font-display text-5xl text-[#EA580C] leading-none select-none mb-2">
                 {step.num}
               </div>
 
-              <div className="flex items-center space-x-3 mt-4 mb-3">
+              <div className="flex items-center space-x-3 mb-3">
                 <div className="p-2 bg-[#171717] rounded-lg border border-white/10">
                   {step.icon}
                 </div>
