@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# AI Agents Customizations & Skills
+.agents/
+.gemini/
+.hallmark/
