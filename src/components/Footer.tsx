@@ -102,7 +102,7 @@ export default function Footer() {
           <div className="pt-8 cta-fade">
             <MagneticButton>
               <a
-                href="https://wa.me/919999999999?text=Hello%20Converge,%20I'd%20like%20to%20discuss%20a%20project!"
+                href="https://wa.me/918200935110?text=Hello%20Converge,%20I'd%20like%20to%20discuss%20a%20project!"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-display uppercase tracking-widest text-sm bg-[#EA580C] text-white px-8 py-4 rounded-full hover:bg-white hover:text-black transition-colors duration-300 shadow-lg shadow-[#EA580C]/20"
@@ -140,18 +140,20 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="mailto:hello@converge.agency"
+                    href="mailto:hello@convergedigitals.com"
                     className="caption text-[#A1A1AA] hover:text-white transition-colors duration-300"
                   >
-                    hello@converge.agency
+                    hello@convergedigitals.com
                   </a>
                 </li>
                 <li>
                   <a
-                    href="tel:+911234567890"
+                    href="https://convergedigitals.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="caption text-[#A1A1AA] hover:text-white transition-colors duration-300"
                   >
-                    +91 1234567890
+                    convergedigitals.com
                   </a>
                 </li>
               </ul>
@@ -163,22 +165,36 @@ export default function Footer() {
                 <span className="eyebrow text-[#EA580C] block">Connect</span>
                 <div className="flex flex-wrap gap-4 mt-2">
                   <a
-                    href="#"
+                    href="https://www.instagram.com/convergedigitals?igsh=NTJqd2FxdTZ2dzMy"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="caption text-[#A1A1AA] hover:text-white transition-colors duration-300"
                   >
                     Instagram
                   </a>
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/company/converge-digitals/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="caption text-[#A1A1AA] hover:text-white transition-colors duration-300"
                   >
                     LinkedIn
                   </a>
                   <a
-                    href="#"
+                    href="https://x.com/ConvergeDigit"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="caption text-[#A1A1AA] hover:text-white transition-colors duration-300"
                   >
-                    Read.cv
+                    X (Twitter)
+                  </a>
+                  <a
+                    href="https://contra.com/converge_digitals_4d28indg?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=converge_digitals_4d28indg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="caption text-[#A1A1AA] hover:text-white transition-colors duration-300"
+                  >
+                    Contra
                   </a>
                 </div>
               </div>

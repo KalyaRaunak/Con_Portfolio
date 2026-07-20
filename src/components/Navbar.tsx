@@ -139,12 +139,12 @@ export default function Navbar() {
             </button>
             
             <MagneticButton>
-              <button
-                onClick={() => handleLinkClick("#contact-section")}
-                className="eyebrow px-5 py-2 border border-white/10 rounded-full text-[#F5F5F5] hover:bg-[#EA580C] hover:border-[#EA580C] hover:text-white transition-all duration-300"
+              <a
+                href="tel:+918200935110"
+                className="eyebrow px-5 py-2 border border-white/10 rounded-full text-[#F5F5F5] hover:bg-[#EA580C] hover:border-[#EA580C] hover:text-white transition-all duration-300 inline-block"
               >
                 Let's Talk
-              </button>
+              </a>
             </MagneticButton>
           </div>
 
@@ -204,12 +204,13 @@ export default function Navbar() {
           >
             03 / Process
           </button>
-          <button
-            onClick={() => handleLinkClick("#contact-section")}
+          <a
+            href="tel:+918200935110"
+            onClick={() => setIsOpen(false)}
             className="font-display text-5xl md:text-7xl uppercase tracking-tighter hover:text-[#EA580C] transition-colors text-left"
           >
             04 / Let's Talk
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Footer */}

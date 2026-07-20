@@ -82,49 +82,50 @@ export default function FilterProjectCard({ project, onClick }: FilterProjectCar
         <div className="w-full h-full relative bg-black flex items-center justify-center overflow-hidden">
           {project.slides.map((slide, index) => {
             const isVideoSlide = slide.toLowerCase().endsWith(".mp4") || slide.toLowerCase().endsWith(".mov");
+            const isActive = index === currentSlide;
+
             return (
               <div
                 key={index}
                 className={`absolute inset-0 w-full h-full flex items-center justify-center transition-all duration-700 ease-in-out ${
-                  index === currentSlide ? "opacity-100 scale-100 z-10" : "opacity-0 scale-105 pointer-events-none z-0"
+                  isActive ? "opacity-100 scale-100 z-10" : "opacity-0 scale-105 pointer-events-none z-0"
                 }`}
               >
-                {/* Blurred backdrop image/video */}
-                {isVideoSlide ? (
-                  <video
-                    src={slide}
-                    loop
-                    muted
-                    playsInline
-                    autoPlay
-                    className="absolute inset-0 w-full h-full object-cover scale-150 blur-2xl opacity-30 pointer-events-none"
-                  />
-                ) : (
-                  <img
-                    src={slide}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-30 pointer-events-none"
-                  />
-                )}
-
-                {/* Sharp foreground image/video */}
-                {isVideoSlide ? (
-                  <video
-                    src={slide}
-                    loop
-                    muted
-                    playsInline
-                    autoPlay
-                    className="relative z-10 h-full aspect-[9/16] object-contain transition-transform duration-750 ease-out group-hover:scale-102"
-                  />
-                ) : (
-                  <img
-                    src={slide}
-                    alt=""
-                    className="relative z-10 h-full w-auto object-contain transition-transform duration-750 ease-out group-hover:scale-102"
-                    loading="lazy"
-                  />
-                )}
+                {/* Video Slide */}
+                {isVideoSlide && isActive ? (
+                  <>
+                    <video
+                      src={slide}
+                      loop
+                      muted
+                      playsInline
+                      autoPlay
+                      className="absolute inset-0 w-full h-full object-cover scale-150 blur-2xl opacity-30 pointer-events-none"
+                    />
+                    <video
+                      src={slide}
+                      loop
+                      muted
+                      playsInline
+                      autoPlay
+                      className="relative z-10 h-full aspect-[9/16] object-contain transition-transform duration-750 ease-out group-hover:scale-102"
+                    />
+                  </>
+                ) : !isVideoSlide ? (
+                  <>
+                    <img
+                      src={slide}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-30 pointer-events-none"
+                    />
+                    <img
+                      src={slide}
+                      alt=""
+                      className="relative z-10 h-full w-auto object-contain transition-transform duration-750 ease-out group-hover:scale-102"
+                      loading="lazy"
+                    />
+                  </>
+                ) : null}
               </div>
             );
           })}
@@ -146,7 +147,8 @@ export default function FilterProjectCard({ project, onClick }: FilterProjectCar
             loop
             muted
             playsInline
-            preload="metadata"
+            autoPlay
+            preload="auto"
             className="relative z-10 h-full aspect-[9/16] object-contain transition-transform duration-750 ease-out group-hover:scale-102"
           />
         </div>
@@ -159,7 +161,8 @@ export default function FilterProjectCard({ project, onClick }: FilterProjectCar
           loop
           muted
           playsInline
-          preload="metadata"
+          autoPlay
+          preload="auto"
           className="w-full h-full object-cover transition-transform duration-750 ease-out group-hover:scale-105"
         />
       ) : (

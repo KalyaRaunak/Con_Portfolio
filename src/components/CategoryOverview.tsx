@@ -7,6 +7,7 @@ interface CategoryItem {
   count: string;
   description: string;
   image: string;
+  video?: string;
   filter: string;
 }
 
@@ -14,17 +15,19 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: 1,
     title: "Websites",
-    count: "09 Projects",
+    count: "07 Projects",
     description: "Immersive custom digital platforms built with premium spacing, speed, and motion design.",
-    image: "/images/nilgiri_co.png",
+    image: "/assets/Webiste_cover_images/VnNS_cover.png",
+    video: "/videos/vns-hostel.mp4",
     filter: "Website"
   },
   {
     id: 2,
     title: "Brand Identity",
-    count: "10 Projects",
+    count: "17 Projects",
     description: "Holistic visual systems, curated typography, and bespoke design guidelines for creative labels.",
-    image: "/images/scoope_icecream.png",
+    image: "/images/velunor_perfume.png",
+    video: "/assets/videos/velunor-reel.mp4",
     filter: "Branding"
   },
   {
@@ -32,23 +35,26 @@ const CATEGORIES: CategoryItem[] = [
     title: "AI Creatives",
     count: "05 Projects",
     description: "Cutting-edge AI-assisted generation, art direction, and product photography visualization.",
-    image: "/images/velunor_perfume.png",
+    image: "/images/one8_red.png",
+    video: "/assets/videos/one-8-red.mp4",
     filter: "AI Creative"
   },
   {
     id: 4,
     title: "Social Media Management",
-    count: "05 Projects",
+    count: "Coming Soon",
     description: "Organic growth campaigns, content creation, brand positioning, and social channel design.",
     image: "/images/ocean_blue.png",
+    video: "/videos/ocean-blue.mp4",
     filter: "Marketing"
   },
   {
     id: 5,
     title: "AI & SaaS Products",
-    count: "06 Projects",
+    count: "Coming Soon",
     description: "End-to-end product strategy, frontend interfaces, SaaS dashboards, and AI application engineering.",
     image: "/images/stheer_uk.png",
+    video: "/videos/stheer-demo.mp4",
     filter: "Automation"
   }
 ];
@@ -105,31 +111,27 @@ export default function CategoryOverview({ onSelectCategory }: CategoryOverviewP
                 onMouseEnter={() => setHoveredId(cat.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => handleRowClick(cat)}
-                className={`relative border-b border-white/5 py-8 md:py-12 px-2 md:px-6 cursor-pointer transition-colors duration-500 hover:bg-[#171717] group ${
-                  isExpanded ? "bg-[#171717]" : ""
-                }`}
+                className={`relative border-b border-white/5 py-8 md:py-12 px-2 md:px-6 cursor-pointer transition-colors duration-500 hover:bg-[#171717] group ${isExpanded ? "bg-[#171717]" : ""
+                  }`}
                 data-cursor="view"
               >
                 {/* Row Main Line */}
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col md:flex-row md:items-baseline md:gap-8">
-                    <span className={`font-display text-4xl md:text-6xl lg:text-7xl uppercase group-hover:text-[#EA580C] transition-colors duration-300 ${
-                      isExpanded ? "text-[#EA580C]" : "text-[#F5F5F5]"
-                    }`}>
+                    <span className={`font-display text-4xl md:text-6xl lg:text-7xl uppercase group-hover:text-[#EA580C] transition-colors duration-300 ${isExpanded ? "text-[#EA580C]" : "text-[#F5F5F5]"
+                      }`}>
                       {cat.title}
                     </span>
                     {/* Project Count (Visible on hover on desktop, always visible on mobile/active) */}
-                    <span className={`caption text-[#A1A1AA] uppercase mt-1 md:mt-0 transition-opacity duration-300 ${
-                      isHovered || isExpanded ? "opacity-100" : "md:opacity-0"
-                    }`}>
+                    <span className={`caption text-[#A1A1AA] uppercase mt-1 md:mt-0 transition-opacity duration-300 ${isHovered || isExpanded ? "opacity-100" : "md:opacity-0"
+                      }`}>
                       {cat.count}
                     </span>
                   </div>
 
                   {/* Icon */}
-                  <div className={`text-[#A1A1AA] group-hover:text-[#EA580C] group-hover:rotate-45 transition-all duration-300 ${
-                    isExpanded ? "rotate-45 text-[#EA580C]" : ""
-                  }`}>
+                  <div className={`text-[#A1A1AA] group-hover:text-[#EA580C] group-hover:rotate-45 transition-all duration-300 ${isExpanded ? "rotate-45 text-[#EA580C]" : ""
+                    }`}>
                     <ArrowUpRight size={36} className="w-8 h-8 md:w-10 md:h-10" />
                   </div>
                 </div>
@@ -137,25 +139,38 @@ export default function CategoryOverview({ onSelectCategory }: CategoryOverviewP
                 {/* Sub-info layout */}
                 {/* Desktop: Hover Reveal */}
                 <div
-                  className={`hidden md:grid grid-cols-12 gap-6 mt-6 transition-all duration-500 overflow-hidden ${
-                    isHovered ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
-                  }`}
+                  className={`hidden md:grid grid-cols-12 gap-6 mt-6 transition-all duration-500 overflow-hidden ${isHovered ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+                    }`}
                 >
                   <div className="col-span-8 flex flex-col justify-center">
                     <p className="body-default text-[#A1A1AA] max-w-xl">
                       {cat.description}
                     </p>
                   </div>
-                  
-                  {/* Thumbnail Image sliding in */}
-                  <div className="col-span-4 flex justify-end relative h-32 overflow-hidden rounded-2xl border border-white/10">
-                    <img
-                      src={cat.image}
-                      alt={cat.title}
-                      className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
-                        isHovered ? "scale-100 translate-x-0" : "scale-110 translate-x-12"
-                      }`}
-                    />
+
+                  {/* Thumbnail Video / Image sliding in */}
+                  <div className="col-span-4 flex justify-end relative h-36 overflow-hidden rounded-2xl border border-white/10 bg-black">
+                    {cat.video ? (
+                      <video
+                        src={cat.video}
+                        poster={cat.image}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
+                          isHovered ? "scale-100 translate-x-0" : "scale-110 translate-x-12"
+                        }`}
+                      />
+                    ) : (
+                      <img
+                        src={cat.image}
+                        alt={cat.title}
+                        className={`h-full w-full object-cover transition-transform duration-700 ease-out ${
+                          isHovered ? "scale-100 translate-x-0" : "scale-110 translate-x-12"
+                        }`}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -168,12 +183,24 @@ export default function CategoryOverview({ onSelectCategory }: CategoryOverviewP
                   <p className="body-default text-[#A1A1AA] mb-4">
                     {cat.description}
                   </p>
-                  <div className="h-48 w-full overflow-hidden rounded-xl border border-white/5">
-                    <img
-                      src={cat.image}
-                      alt={cat.title}
-                      className="h-full w-full object-cover"
-                    />
+                  <div className="h-48 w-full overflow-hidden rounded-xl border border-white/5 bg-black">
+                    {cat.video ? (
+                      <video
+                        src={cat.video}
+                        poster={cat.image}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <img
+                        src={cat.image}
+                        alt={cat.title}
+                        className="h-full w-full object-cover"
+                      />
+                    )}
                   </div>
                 </div>
               </div>

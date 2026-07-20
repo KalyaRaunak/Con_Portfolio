@@ -216,7 +216,7 @@ export default function App() {
 
                 <MagneticButton>
                   <a
-                    href="#contact-section"
+                    href="tel:+918200935110"
                     className="eyebrow text-[#F5F5F5] hover:text-[#EA580C] transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#EA580C] hover:after:w-full after:transition-all after:duration-300"
                     data-cursor="chat"
                   >

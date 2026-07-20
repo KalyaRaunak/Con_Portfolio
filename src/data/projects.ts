@@ -123,14 +123,6 @@ export const PROJECTS: FilterProject[] = [
     link: "https://vns-tau.vercel.app/"
   },
   {
-    id: "ssi",
-    title: "SSI",
-    category: "Website",
-    service: "Coaching Institute Enrollment Systems",
-    image: "/assets/Webiste_cover_images/ssi_cover.png",
-    link: "https://ssi-tau.vercel.app/"
-  },
-  {
     id: "enki",
     title: "ENKI",
     category: "Website",
@@ -138,13 +130,6 @@ export const PROJECTS: FilterProject[] = [
     image: "/assets/Webiste_cover_images/enki_cover.png",
     video: "/videos/enki.mp4",
     link: "https://enki-bay.vercel.app/"
-  },
-  {
-    id: "ganpati-computers",
-    title: "Ganpati Computers",
-    category: "Website",
-    service: "IT Repair Booking & CRM Pipelines",
-    image: "/images/ganpati_computers.png"
   },
   {
     id: "nilgiri",
@@ -387,8 +372,8 @@ export const PROJECTS: FilterProject[] = [
     isReel: true
   },
   {
-    id: "one8-black",
-    title: "one8 Black",
+    id: "one8-green",
+    title: "one8 Green",
     category: "AI Creative",
     service: "Athletic Sneaker Concept Generation",
     image: "/images/one8_green.png",
