@@ -115,7 +115,7 @@ export default function Timeline() {
         return;
       }
 
-      // Desktop: Pinned horizontal grid with staggered off-screen slide-ins (Unchanged Animation)
+      // Desktop: Smooth Pinned Scroll Timeline
       const progressBar = progressBarRef.current;
       if (!progressBar) return;
 
@@ -123,51 +123,81 @@ export default function Timeline() {
         scrollTrigger: {
           trigger: container,
           pin: true,
-          scrub: 0.5,
+          scrub: 0.8,
           start: "top top",
-          end: "+=1800", // Pinned scroll length
+          end: "+=1200", // Smooth pinned scroll distance
           invalidateOnRefresh: true,
         }
       });
 
-      // Extend progress line across from left to right
-      pinTimeline.fromTo(progressBar,
+      // 1. Draw orange connector line across from left to right
+      pinTimeline.fromTo(
+        progressBar,
         { scaleX: 0 },
         { scaleX: 1, ease: "none", duration: 1.0 },
         0
       );
 
-      // Stagger sliding in each step horizontally from off-screen right
+      // 2. Sequential step highlights and slide reveals
       const steps = container.querySelectorAll(".timeline-step-desktop");
       steps.forEach((step, idx) => {
-        if (idx === 0) return; // Step 1 is already sitting in its column
-
         const stepNum = step.querySelector(".timeline-num-desktop");
         const iconContainer = step.querySelector(".timeline-icon-container");
-        const screenWidth = window.innerWidth;
+        const stepTitle = step.querySelector(".timeline-title-desktop");
+        const stepDesc = step.querySelector(".timeline-desc-desktop");
 
-        pinTimeline.fromTo(
-          step,
-          { opacity: 0, x: () => screenWidth },
-          { opacity: 1, x: 0, ease: "power2.out", duration: 0.25 },
-          (idx - 1) / (steps.length - 1)
-        );
+        const startTime = idx / (steps.length - 1);
+
+        if (idx > 0) {
+          // Reveal step cards after step 1
+          pinTimeline.fromTo(
+            step,
+            { opacity: 0.15, y: 24 },
+            { opacity: 1, y: 0, ease: "power2.out", duration: 0.2 },
+            startTime
+          );
+        } else {
+          // Step 1 initial pulse highlight
+          pinTimeline.to(
+            step,
+            { opacity: 1, y: 0, duration: 0.1 },
+            0
+          );
+        }
 
         if (iconContainer) {
           pinTimeline.fromTo(
             iconContainer,
-            { borderColor: "rgba(255, 255, 255, 0.05)", backgroundColor: "#171717" },
-            { borderColor: "#EA580C", backgroundColor: "rgba(234, 88, 12, 0.1)", duration: 0.15 },
-            ((idx - 1) / (steps.length - 1)) + 0.1
+            { borderColor: "rgba(255, 255, 255, 0.08)", backgroundColor: "#171717" },
+            { borderColor: "#EA580C", backgroundColor: "rgba(234, 88, 12, 0.15)", boxShadow: "0 0 15px rgba(234, 88, 12, 0.3)", duration: 0.15 },
+            startTime
           );
         }
 
         if (stepNum) {
           pinTimeline.fromTo(
             stepNum,
-            { filter: "drop-shadow(0 0 0px rgba(234, 88, 12, 0))" },
-            { filter: "drop-shadow(0 0 12px rgba(234, 88, 12, 0.45))", duration: 0.15 },
-            ((idx - 1) / (steps.length - 1)) + 0.1
+            { color: "rgba(255, 255, 255, 0.2)", filter: "drop-shadow(0 0 0px rgba(234, 88, 12, 0))" },
+            { color: "#EA580C", filter: "drop-shadow(0 0 14px rgba(234, 88, 12, 0.5))", duration: 0.15 },
+            startTime
+          );
+        }
+
+        if (stepTitle) {
+          pinTimeline.fromTo(
+            stepTitle,
+            { color: "#A1A1AA" },
+            { color: "#F5F5F5", duration: 0.15 },
+            startTime
+          );
+        }
+
+        if (stepDesc) {
+          pinTimeline.fromTo(
+            stepDesc,
+            { opacity: 0.5 },
+            { opacity: 1, duration: 0.15 },
+            startTime
           );
         }
       });
@@ -179,48 +209,48 @@ export default function Timeline() {
   return (
     <div ref={containerRef} className="relative bg-[#0F0F10] border-t border-white/5" id="process-section">
       {/* Desktop Horizontal View */}
-      <div className="hidden lg:flex flex-col justify-end pb-32 h-screen relative overflow-hidden px-16">
-        {/* Intro Header (Top-Left aligned matching 1st image) */}
-        <div className="absolute top-20 left-16 max-w-lg z-10 select-none">
+      <div className="hidden lg:flex flex-col justify-center h-screen relative overflow-hidden px-12 md:px-16">
+        {/* Intro Header */}
+        <div className="max-w-7xl mx-auto w-full mb-16 select-none">
           <span className="eyebrow text-[#EA580C] uppercase block mb-2">Our Process</span>
           <h2 className="section-headline text-white uppercase">How We Work</h2>
         </div>
 
         {/* 6-Column Layout Container */}
         <div className="relative w-full max-w-7xl mx-auto">
-          {/* Connector line passing behind the centers of the icons */}
-          <div className="absolute top-[148px] left-[24px] right-[14%] h-[2px] bg-white/5 z-0">
+          {/* Connector line passing behind the center of the icons */}
+          <div className="absolute top-[138px] left-[20px] right-[20px] h-[2px] bg-white/10 z-0">
             <div
               ref={progressBarRef}
-              className="h-full bg-[#EA580C] origin-left scale-x-0 w-full"
+              className="h-full bg-[#EA580C] origin-left scale-x-0 w-full shadow-[0_0_12px_#EA580C]"
             />
           </div>
 
-          {/* Grid of Steps (Left-aligned text layout matching 1st image) */}
-          <div className="grid grid-cols-6 gap-8 relative z-10">
+          {/* Grid of Steps */}
+          <div className="grid grid-cols-6 gap-6 relative z-10">
             {STEPS.map((step, idx) => (
               <div
                 key={step.id}
-                className="timeline-step-desktop flex flex-col justify-center select-none text-left"
-                style={{ opacity: idx === 0 ? 1 : 0 }} // Step 1 visible on load
+                className="timeline-step-desktop flex flex-col justify-start select-none text-left transition-opacity duration-300"
+                style={{ opacity: idx === 0 ? 1 : 0.2 }}
               >
                 {/* Step number on top */}
-                <div className="timeline-num-desktop font-display text-[#EA580C] text-8xl leading-none select-none transition-all duration-300">
+                <div className="timeline-num-desktop font-display text-white/20 text-7xl lg:text-8xl leading-none select-none transition-all duration-300">
                   {step.num}
                 </div>
 
-                {/* Icon beside Title (Flex-row layout matching 1st image) */}
+                {/* Icon beside Title */}
                 <div className="flex items-center space-x-3 mt-6 mb-4">
-                  <div className="timeline-icon-container p-3 bg-[#171717] rounded-xl border border-white/5 flex items-center justify-center transition-all duration-300 flex-shrink-0">
+                  <div className="timeline-icon-container p-3 bg-[#171717] rounded-xl border border-white/10 flex items-center justify-center transition-all duration-300 flex-shrink-0">
                     {step.icon}
                   </div>
-                  <h3 className="font-display text-2xl text-[#F5F5F5] uppercase tracking-tight leading-none">
+                  <h3 className="timeline-title-desktop font-display text-xl lg:text-2xl text-[#A1A1AA] uppercase tracking-tight leading-none transition-colors duration-300">
                     {step.title}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="body-default text-[#A1A1AA] text-sm leading-relaxed max-w-[210px]">
+                <p className="timeline-desc-desktop body-default text-[#A1A1AA] text-xs lg:text-sm leading-relaxed opacity-60 transition-opacity duration-300">
                   {step.desc}
                 </p>
               </div>
