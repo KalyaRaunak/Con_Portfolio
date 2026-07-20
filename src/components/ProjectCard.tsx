@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -17,6 +17,8 @@ export interface Project {
   video?: string;
   link: string;
   layout: "left" | "right";
+  slides?: string[];
+  isReel?: boolean;
 }
 
 interface ProjectCardProps {
@@ -29,6 +31,46 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const mediaRef = useRef<HTMLImageElement | HTMLVideoElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+
+  // Carousel slider state
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const autoplayTimerRef = useRef<any>(null);
+
+  const resetAutoplay = () => {
+    if (autoplayTimerRef.current) {
+      clearInterval(autoplayTimerRef.current);
+    }
+    if (project.slides && project.slides.length > 0) {
+      autoplayTimerRef.current = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % project.slides!.length);
+      }, 2500); // slide transitions every 2.5 seconds (2-3s range)
+    }
+  };
+
+  useEffect(() => {
+    resetAutoplay();
+    return () => {
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+      }
+    };
+  }, [project.slides]);
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!project.slides) return;
+    setCurrentSlide((prev) => (prev - 1 + project.slides!.length) % project.slides!.length);
+    resetAutoplay();
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!project.slides) return;
+    setCurrentSlide((prev) => (prev + 1) % project.slides!.length);
+    resetAutoplay();
+  };
 
   useEffect(() => {
     // Respect prefers-reduced-motion
@@ -106,14 +148,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     const hasHover = window.matchMedia("(hover: hover)").matches;
     let observer: IntersectionObserver | null = null;
 
-    if (!hasHover) {
-      // Mobile behavior: autoplay video when scrolled into view
+    // Reels videos should autoplay on viewport entry on BOTH mobile and desktop
+    if (!hasHover || project.isReel) {
       observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               video.play().catch((err) => {
-                console.log("Mobile autoplay failed:", err);
+                console.log("Viewport autoplay failed:", err);
               });
             } else {
               video.pause();
@@ -152,7 +194,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         observer.disconnect();
       }
     };
-  }, [project.video]);
+  }, [project.video, project.isReel]);
 
   return (
     <div
@@ -230,7 +272,82 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             style={{ clipPath: "inset(100% 0% 0% 0%)" }}
             data-cursor="view"
           >
-            {project.video ? (
+            {/* Branding Carousel */}
+            {project.slides && project.slides.length > 0 ? (
+              <div
+                ref={mediaRef as React.RefObject<HTMLDivElement>}
+                className="w-full h-full relative origin-center scale-115 transition-transform duration-700 ease-out bg-black flex items-center justify-center overflow-hidden"
+              >
+                {project.slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 w-full h-full flex items-center justify-center transition-all duration-700 ease-in-out ${
+                      index === currentSlide ? "opacity-100 scale-100 z-10" : "opacity-0 scale-105 pointer-events-none z-0"
+                    }`}
+                  >
+                    {/* Blurred backdrop image */}
+                    <img
+                      src={slide}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-30 pointer-events-none"
+                    />
+                    
+                    {/* Sharp centered image */}
+                    <img
+                      src={slide}
+                      alt={`${project.name} slide ${index + 1}`}
+                      className="relative z-10 h-full w-auto object-contain"
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                  </div>
+                ))}
+
+                {/* Left/Right Navigation Arrows */}
+                <button
+                  onClick={handlePrev}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/60 hover:bg-black/90 hover:scale-110 text-white rounded-full p-2.5 transition-all duration-300 backdrop-blur-md border border-white/10 opacity-0 group-hover/card:opacity-100 cursor-pointer"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/60 hover:bg-black/90 hover:scale-110 text-white rounded-full p-2.5 transition-all duration-300 backdrop-blur-md border border-white/10 opacity-0 group-hover/card:opacity-100 cursor-pointer"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            ) : project.isReel && project.video ? (
+              /* Option A: Reels Centered with Blurred Backdrop */
+              <div className="w-full h-full relative bg-black flex items-center justify-center overflow-hidden">
+                {/* Blurred backdrop video */}
+                <video
+                  src={project.video}
+                  loop
+                  muted
+                  playsInline
+                  autoPlay
+                  className="absolute inset-0 w-full h-full object-cover scale-150 blur-2xl opacity-30 pointer-events-none"
+                />
+                
+                {/* Sharp foreground video */}
+                <video
+                  ref={(el) => {
+                    (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
+                    (mediaRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
+                  }}
+                  src={project.video}
+                  poster={project.image}
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="relative z-10 h-full aspect-[9/16] object-contain origin-center transition-transform duration-700 ease-out group-hover/card:scale-105"
+                />
+              </div>
+            ) : project.video ? (
+              /* Default Video Content */
               <video
                 ref={(el) => {
                   (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
@@ -245,6 +362,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 className="w-full h-full object-cover origin-center scale-115 transition-transform duration-700 ease-out group-hover/card:scale-105"
               />
             ) : (
+              /* Default Image Content */
               <img
                 ref={mediaRef as React.RefObject<HTMLImageElement>}
                 src={project.image}

@@ -1,315 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 import { gsap } from "gsap";
-
-interface FilterProject {
-  id: string;
-  title: string;
-  category: string; // matches filter: "Website" | "Branding" | "AI Creative" | "Marketing" | "Automation"
-  service: string;
-  image: string;
-  video?: string;
-}
-
-const PROJECTS: FilterProject[] = [
-  {
-    id: "ocean-blue",
-    title: "Ocean Blue Education",
-    category: "Website",
-    service: "Coaching Institute Web & Ad Campaigns",
-    image: "/images/ocean_blue.png",
-    video: "/videos/ocean-blue.mp4"
-  },
-  {
-    id: "stheer-uk",
-    title: "STHEER UK",
-    category: "Website",
-    service: "Digital Solutions & UI Architecture",
-    image: "/images/stheer_uk.png",
-    video: "/videos/stheer-demo.mp4"
-  },
-  {
-    id: "mahesh-masala",
-    title: "Mahesh Masala",
-    category: "Website",
-    service: "Spices Brand Identity & Store",
-    image: "/images/mahesh_masala.png",
-    video: "/videos/mahesh-masala.mp4"
-  },
-  {
-    id: "vns-hostel",
-    title: "VNS Hostel",
-    category: "Website",
-    service: "Student Accommodation Booking Platform",
-    image: "/images/vns_hostel.png",
-    video: "/videos/vns-hostel.mp4"
-  },
-  {
-    id: "ssi",
-    title: "SSI",
-    category: "Website",
-    service: "Coaching Institute Enrollment Systems",
-    image: "/images/ssi_education.png"
-  },
-  {
-    id: "enki",
-    title: "ENKI",
-    category: "Website",
-    service: "Organic Mushroom Branding & Design",
-    image: "/images/enki_mushrooms.png",
-    video: "/videos/enki.mp4"
-  },
-  {
-    id: "ganpati-computers",
-    title: "Ganpati Computers",
-    category: "Website",
-    service: "IT Repair Booking & CRM Pipelines",
-    image: "/images/ganpati_computers.png"
-  },
-  {
-    id: "nilgiri",
-    title: "Nilgiri Co.",
-    category: "Website",
-    service: "Premium Tea E-Commerce Platform",
-    image: "/images/nilgiri_co.png",
-    video: "/videos/nilgiri.mp4"
-  },
-  {
-    id: "the-mist",
-    title: "THE MIST",
-    category: "Website",
-    service: "Luxury Fragrance Digital Showcase",
-    image: "/images/the_mist.png",
-    video: "/videos/the-mist.mp4"
-  },
-  {
-    id: "kunj-infra-logo",
-    title: "Kunj Infra Logo",
-    category: "Branding",
-    service: "Infrastructure Brand Identity",
-    image: "/images/kunj_infra_logo.png"
-  },
-  {
-    id: "enki-logo",
-    title: "ENKI Logo",
-    category: "Branding",
-    service: "Organic Apothecary Brand Identity",
-    image: "/images/enki_logo.png"
-  },
-  {
-    id: "velunor-brand",
-    title: "Velunor",
-    category: "Branding",
-    service: "Luxury Fragrance Package Design",
-    image: "/images/velunor_perfume.png"
-  },
-  {
-    id: "velunor-blue",
-    title: "Velunor Blue",
-    category: "Branding",
-    service: "Oceanic Fragrance Bottle Design",
-    image: "/images/velunor_blue.png"
-  },
-  {
-    id: "velunor-red",
-    title: "Velunor Red",
-    category: "Branding",
-    service: "Crimson Fragrance Bottle Design",
-    image: "/images/velunor_red.png"
-  },
-  {
-    id: "watch-poster",
-    title: "Watch Poster",
-    category: "Branding",
-    service: "Chronograph Advertising Campaign",
-    image: "/images/watch_poster.png"
-  },
-  {
-    id: "jwel-showcase",
-    title: "Jwel Showcase",
-    category: "Branding",
-    service: "Luxury Jewelry Digital Layouts",
-    image: "/images/jwel_showcase.png"
-  },
-  {
-    id: "scoope-brand",
-    title: "Scoope",
-    category: "Branding",
-    service: "Artisanal Ice Cream Branding",
-    image: "/images/scoope_icecream.png"
-  },
-  {
-    id: "nilgiri-brand",
-    title: "Nilgiri.co",
-    category: "Branding",
-    service: "Organic Tea Packaging & Identity",
-    image: "/images/nilgiri_co.png"
-  },
-  {
-    id: "magazine",
-    title: "Magzine",
-    category: "Branding",
-    service: "Editorial Print Publication Mockups",
-    image: "/images/magzine.png"
-  },
-  {
-    id: "one8-green",
-    title: "one8 Green",
-    category: "AI Creative",
-    service: "Athletic Sneaker Concept Generation",
-    image: "/images/one8_green.png"
-  },
-  {
-    id: "one8-red",
-    title: "one8 Red",
-    category: "AI Creative",
-    service: "Athletic Sneaker Concept Generation",
-    image: "/images/one8_red.png"
-  },
-  {
-    id: "one8-sports",
-    title: "One8 sports",
-    category: "AI Creative",
-    service: "Activewear Gear Mockups",
-    image: "/images/one8_sports.png"
-  },
-  {
-    id: "watch-creative",
-    title: "Watch",
-    category: "AI Creative",
-    service: "Futuristic Holographic Smartwatch Concept",
-    image: "/images/watch_creative.png"
-  },
-  {
-    id: "creative-cuts",
-    title: "Creative Cuts",
-    category: "AI Creative",
-    service: "Modern Barbershop Concept Art",
-    image: "/images/creative_cuts.png"
-  }
-];
+import { PROJECTS } from "../data/projects";
+import type { FilterProject } from "../data/projects";
+import FilterProjectCard from "./FilterProjectCard";
+import LightboxModal from "./LightboxModal";
 
 const FILTERS = ["All", "Website", "Branding", "AI Creative", "Marketing", "Automation"];
-
-interface FilterProjectCardProps {
-  project: FilterProject;
-}
-
-function FilterProjectCard({ project }: FilterProjectCardProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const hasHover = window.matchMedia("(hover: hover)").matches;
-    let observer: IntersectionObserver | null = null;
-
-    if (!hasHover) {
-      // Mobile behavior: autoplay video when scrolled into view
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              video.play().catch((err) => {
-                console.log("Mobile autoplay failed:", err);
-              });
-            } else {
-              video.pause();
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-      observer.observe(video);
-    } else {
-      // Desktop behavior: play on hover, pause/reset on leave
-      const card = containerRef.current;
-      if (card) {
-        const handleMouseEnter = () => {
-          video.play().catch((err) => {
-            console.log("Hover play failed:", err);
-          });
-        };
-        const handleMouseLeave = () => {
-          video.pause();
-          video.currentTime = 0;
-        };
-
-        card.addEventListener("mouseenter", handleMouseEnter);
-        card.addEventListener("mouseleave", handleMouseLeave);
-
-        return () => {
-          card.removeEventListener("mouseenter", handleMouseEnter);
-          card.removeEventListener("mouseleave", handleMouseLeave);
-        };
-      }
-    }
-
-    return () => {
-      if (observer) {
-        observer.disconnect();
-      }
-    };
-  }, [project.video]);
-
-  return (
-    <div
-      ref={containerRef}
-      className="group relative overflow-hidden rounded-[20px] md:rounded-[28px] border border-white/5 bg-[#171717] aspect-[4/3] cursor-pointer"
-      data-cursor="view"
-    >
-      {/* Media: Video or Image */}
-      {project.video ? (
-        <video
-          ref={videoRef}
-          src={project.video}
-          poster={project.image}
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover transition-transform duration-750 ease-out group-hover:scale-105"
-        />
-      ) : (
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-750 ease-out group-hover:scale-105"
-          loading="lazy"
-        />
-      )}
-
-      {/* Bottom Gradient overlay for legibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:from-black/90 pointer-events-none" />
-
-      {/* Top-left category badge */}
-      <div className="absolute top-6 left-6 pointer-events-none">
-        <span className="eyebrow bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-white text-[11px]">
-          {project.category}
-        </span>
-      </div>
-
-      {/* Bottom Project Details */}
-      {/* Desktop: Slide up on hover. Mobile: Always visible */}
-      <div className="absolute bottom-6 left-6 right-6 flex flex-col md:translate-y-4 md:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out pointer-events-none">
-        <h4 className="font-display text-2xl uppercase text-[#F5F5F5] tracking-tight">
-          {project.title}
-        </h4>
-        <span className="caption text-[#A1A1AA] mt-1">{project.service}</span>
-      </div>
-
-      {/* Mobile details (always visible at bottom on touch devices) */}
-      <div className="md:hidden absolute bottom-6 left-6 right-6 flex flex-col pointer-events-none">
-        <h4 className="font-display text-2xl uppercase text-[#F5F5F5] tracking-tight">
-          {project.title}
-        </h4>
-        <span className="caption text-[#A1A1AA] mt-1">{project.service}</span>
-      </div>
-    </div>
-  );
-}
 
 interface FilterGridProps {
   activeFilter?: string;
@@ -323,6 +20,10 @@ export default function FilterGrid({
   onGoBack
 }: FilterGridProps = {}) {
   const [internalFilter, setInternalFilter] = useState("All");
+  const [activeLightbox, setActiveLightbox] = useState<{
+    project: FilterProject;
+    slideIndex: number;
+  } | null>(null);
 
   const currentFilter = externalFilter !== undefined ? externalFilter : internalFilter;
 
@@ -427,7 +128,15 @@ export default function FilterGrid({
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {filteredProjects.map((project) => (
-            <FilterProjectCard key={project.id} project={project} />
+            <FilterProjectCard
+              key={project.id}
+              project={project}
+              onClick={() => {
+                if ((project.slides && project.slides.length > 0) || (project.isReel && project.video)) {
+                  setActiveLightbox({ project, slideIndex: 0 });
+                }
+              }}
+            />
           ))}
         </div>
 
@@ -445,6 +154,16 @@ export default function FilterGrid({
           </div>
         )}
       </div>
+
+      {/* Lightbox Modal */}
+      {activeLightbox && (
+        <LightboxModal
+          project={activeLightbox.project}
+          initialIndex={activeLightbox.slideIndex}
+          onClose={() => setActiveLightbox(null)}
+        />
+      )}
     </section>
   );
 }
+
