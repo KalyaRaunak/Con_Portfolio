@@ -18,7 +18,7 @@ const CATEGORIES: CategoryItem[] = [
     count: "07 Projects",
     description: "Immersive custom digital platforms built with premium spacing, speed, and motion design.",
     image: "/assets/Webiste_cover_images/VnNS_cover.png",
-    video: "/videos/vns-hostel.mp4",
+    video: "/assets/videos/VNS_hostel.mp4",
     filter: "Website"
   },
   {
@@ -45,7 +45,7 @@ const CATEGORIES: CategoryItem[] = [
     count: "Coming Soon",
     description: "Organic growth campaigns, content creation, brand positioning, and social channel design.",
     image: "/images/ocean_blue.png",
-    video: "/videos/ocean-blue.mp4",
+    video: "/assets/videos/ocean-blue.mp4",
     filter: "Marketing"
   },
   {
@@ -54,7 +54,7 @@ const CATEGORIES: CategoryItem[] = [
     count: "Coming Soon",
     description: "End-to-end product strategy, frontend interfaces, SaaS dashboards, and AI application engineering.",
     image: "/images/stheer_uk.png",
-    video: "/videos/stheer-demo.mp4",
+    video: "/assets/videos/Stheer_demo.mp4",
     filter: "Automation"
   }
 ];

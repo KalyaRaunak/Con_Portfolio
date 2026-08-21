@@ -34,7 +34,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     year: "2025",
     description: "A premium coaching portal built with tailored curriculum maps, conversion layouts, and a strict oceanic typography system. Delivering accessible, high-performance learning resources.",
     image: "/assets/Webiste_cover_images/ocean_blue_cover.png",
-    video: "/videos/ocean-blue.mp4",
+    video: "/assets/videos/ocean-blue.mp4",
     link: "https://www.oceanblueeducation.com/",
     layout: "left"
   },
@@ -66,7 +66,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     year: "2025",
     description: "A premium organic tea brand experience highlighting direct-from-source agricultural transparency, custom flavor profiling interfaces, and earthy color palettes.",
     image: "/assets/Webiste_cover_images/nilgiri_cover.png",
-    video: "/videos/nilgiri.mp4",
+    video: "/assets/videos/Nilgiri.mp4",
     link: "https://nilgiri-co.vercel.app/",
     layout: "left"
   },
@@ -92,7 +92,7 @@ export const PROJECTS: FilterProject[] = [
     category: "Website",
     service: "Coaching Institute Web & Ad Campaigns",
     image: "/assets/Webiste_cover_images/ocean_blue_cover.png",
-    video: "/videos/ocean-blue.mp4",
+    video: "/assets/videos/ocean-blue.mp4",
     link: "https://www.oceanblueeducation.com/"
   },
   {
@@ -101,7 +101,7 @@ export const PROJECTS: FilterProject[] = [
     category: "Website",
     service: "Digital Solutions & UI Architecture",
     image: "/assets/Webiste_cover_images/stheer cover.png",
-    video: "/videos/stheer-demo.mp4",
+    video: "/assets/videos/Stheer_demo.mp4",
     link: "https://stheer-main.vercel.app/"
   },
   {
@@ -110,7 +110,7 @@ export const PROJECTS: FilterProject[] = [
     category: "Website",
     service: "Spices Brand Identity & Store",
     image: "/assets/Webiste_cover_images/mahesh_masala_cover.png",
-    video: "/videos/mahesh-masala.mp4",
+    video: "/assets/videos/Mahesh-masala.mp4",
     link: "https://www.maheshmasalagruhudhyog.com/"
   },
   {
@@ -119,7 +119,7 @@ export const PROJECTS: FilterProject[] = [
     category: "Website",
     service: "Student Accommodation Booking Platform",
     image: "/assets/Webiste_cover_images/VnNS_cover.png",
-    video: "/videos/vns-hostel.mp4",
+    video: "/assets/videos/VNS_hostel.mp4",
     link: "https://vns-tau.vercel.app/"
   },
   {
@@ -128,7 +128,7 @@ export const PROJECTS: FilterProject[] = [
     category: "Website",
     service: "Organic Mushroom Branding & Design",
     image: "/assets/Webiste_cover_images/enki_cover.png",
-    video: "/videos/enki.mp4",
+    video: "/assets/videos/ENKI.mp4",
     link: "https://enki-bay.vercel.app/"
   },
   {
@@ -137,7 +137,7 @@ export const PROJECTS: FilterProject[] = [
     category: "Website",
     service: "Premium Tea E-Commerce Platform",
     image: "/assets/Webiste_cover_images/nilgiri_cover.png",
-    video: "/videos/nilgiri.mp4",
+    video: "/assets/videos/Nilgiri.mp4",
     link: "https://nilgiri-co.vercel.app/"
   },
   {
@@ -146,7 +146,7 @@ export const PROJECTS: FilterProject[] = [
     category: "Website",
     service: "Luxury Fragrance Digital Showcase",
     image: "/assets/Webiste_cover_images/mist_cover.png",
-    video: "/videos/the-mist.mp4",
+    video: "/assets/videos/THE mist.mp4",
     link: "https://mist-blush.vercel.app/"
   },
   {
