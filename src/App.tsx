@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -10,14 +10,15 @@ import Marquee from "./components/Marquee";
 import CategoryOverview from "./components/CategoryOverview";
 import ProjectCard from "./components/ProjectCard";
 
-import FilterGrid from "./components/FilterGrid";
-import Timeline from "./components/Timeline";
-import Testimonial from "@/components/ui/demo";
-import TechEcosystem from "./components/TechEcosystem";
 import Footer from "./components/Footer";
 import StatBlock from "./components/StatBlock";
 import TorchLogoReveal from "./components/TorchLogoReveal";
 import { FEATURED_PROJECTS } from "./data/projects";
+
+const FilterGrid = lazy(() => import("./components/FilterGrid"));
+const Timeline = lazy(() => import("./components/Timeline"));
+const Testimonial = lazy(() => import("@/components/ui/demo"));
+const TechEcosystem = lazy(() => import("./components/TechEcosystem"));
 
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -333,20 +334,28 @@ export default function App() {
       </section>
 
       {/* 6. All Work Filter Grid */}
-      <FilterGrid
-        activeFilter={activeFilter}
-        onFilterChange={setActiveFilter}
-        onGoBack={handleGoBackToCategories}
-      />
+      <Suspense fallback={<div className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5" />}>
+        <FilterGrid
+          activeFilter={activeFilter}
+          onFilterChange={setActiveFilter}
+          onGoBack={handleGoBackToCategories}
+        />
+      </Suspense>
 
       {/* 7. How We Work Timeline */}
-      <Timeline />
+      <Suspense fallback={<div className="bg-[#0F0F10] border-t border-white/5 h-screen" />}>
+        <Timeline />
+      </Suspense>
 
       {/* 8. Testimonial */}
-      <Testimonial />
+      <Suspense fallback={<div className="py-24 md:py-40 bg-[#0F0F10] border-t border-white/5" />}>
+        <Testimonial />
+      </Suspense>
 
       {/* Orbiting Circles Technology Ecosystem */}
-      <TechEcosystem />
+      <Suspense fallback={<div className="py-24 md:py-32 bg-[#0F0F10] border-t border-white/5" />}>
+        <TechEcosystem />
+      </Suspense>
 
       {/* 9 & 10. CTA & Footer (combined layout with WhatsApp FAB) */}
       <Footer />
